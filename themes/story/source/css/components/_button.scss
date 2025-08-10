@@ -104,7 +104,7 @@
 				}
 
 				&:active {
-					background-color: color.adjust(_palette($p, accent), $lightness: -12);
+					background-color: color.adjust(_palette($p, accent), $lightness: -12%);
 				}
 			}
 		}

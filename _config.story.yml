@@ -1,0 +1,33 @@
+# This file contains settings specific to the 'story' theme.
+
+# -- Main Settings -------------------------------------------------
+# These settings control the core elements of the theme.
+
+# Website favicon
+favicon: /images/favicon.png
+
+# Main navigation menu
+# The landing page will be the root.
+menu:
+- name: Home
+  url: /
+- name: Pricing
+  url: /pricing/
+- name: Contact
+  url: /#contact # This will be an anchor link to the contact section on the home page
+
+social:
+  rednote: https://xxx
+
+footer:
+  copyright: "Elainxi Events"
+
+attribution:
+  enable: true
+  text: "Design: STORY by"
+  url: "https://html5up.net"
+  name: "HTML5 UP"
+
+# Plugin settings
+sass:
+  style: expanded

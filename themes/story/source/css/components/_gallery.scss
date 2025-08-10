@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @use "sass:color";
 ///
 /// Story by HTML5 UP
@@ -151,7 +153,7 @@
 
 		@include breakpoint('<=large') {
 			article {
-				width: (100% / 3);
+				width: math.div(100%, 3);
 
 				.caption {
 					padding: 1rem;
@@ -203,7 +205,7 @@
 
 					@include breakpoint('<=medium') {
 						article {
-							width: (100% / 3);
+							width: math.div(100%, 3);
 
 							.caption {
 								padding: 1rem;
@@ -228,7 +230,7 @@
 
 				&.big {
 					article {
-						width: (100% / 3);
+						width: math.div(100%, 3);
 
 						.caption {
 							padding: 3rem;

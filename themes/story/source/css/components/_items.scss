@@ -6,7 +6,9 @@
 
 /* Items (transitions) */
 
-	.items {
+	@use "sass:math";
+
+.items {
 
 		// Mixin.
 			@mixin transition-items($event) {
@@ -62,7 +64,7 @@
 		&.#{$name} {
 			> * {
 				@include padding($padding, $padding);
-				width: #{100% / $size};
+				width: #{math.div(100%, $size)};
 
 				&:nth-child(-n + #{$size}) {
 					border-top-width: 0;
@@ -166,7 +168,7 @@
 		&.#{$name} {
 			> * {
 				@include padding($padding, $padding);
-				width: #{100% / $size};
+				width: #{math.div(100%, $size)};
 
 				&:nth-child(-n + #{$size}) {
 					border-top-width: 0;
@@ -249,7 +251,7 @@
 		&.#{$name} {
 			> * {
 				@include padding($padding, $padding);
-				width: #{100% / $size};
+				width: #{math.div(100%, $size)};
 			}
 		}
 	}

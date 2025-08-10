@@ -1,3 +1,4 @@
+@use "sass:color";
 ///
 /// Story by HTML5 UP
 /// html5up.net | @ajlkn
@@ -955,13 +956,13 @@
 	@mixin color-spotlight($p: null) {
 		.spotlight {
 			.image {
-				background-color: transparentize(_palette($p, fg-bold), 0.875);
+				background-color: color.adjust(_palette($p, fg-bold), $alpha: -0.875);
 			}
 
 			@if ($p != 'invert') {
 				&.invert {
 					.image {
-						background-color: transparentize(_palette(invert, fg-bold), 0.875);
+						background-color: color.adjust(_palette(invert, fg-bold), $alpha: -0.875);
 					}
 				}
 			}

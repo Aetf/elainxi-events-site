@@ -3,6 +3,9 @@
 @use "sass:math";
 @use "sass:meta";
 @use "sass:string";
+
+@use 'vars' as *;
+
 /// Removes a specific item from a list.
 /// @author Hugo Giraudel
 /// @param {list} $list List.
@@ -62,34 +65,86 @@
 /// Gets a duration value.
 /// @param {string} $keys Key(s).
 /// @return {string} Value.
-@function _duration($keys...) {
+@function var_duration($keys...) {
 	@return val($duration, $keys...);
 }
 
 /// Gets a font value.
 /// @param {string} $keys Key(s).
 /// @return {string} Value.
-@function _font($keys...) {
+@function var_font($keys...) {
 	@return val($font, $keys...);
 }
 
 /// Gets a misc value.
 /// @param {string} $keys Key(s).
 /// @return {string} Value.
-@function _misc($keys...) {
+@function var_misc($keys...) {
 	@return val($misc, $keys...);
 }
 
 /// Gets a palette value.
 /// @param {string} $keys Key(s).
 /// @return {string} Value.
-@function _palette($keys...) {
+@function var_palette($keys...) {
 	@return val($palette, $keys...);
 }
 
 /// Gets a size value.
 /// @param {string} $keys Key(s).
 /// @return {string} Value.
-@function _size($keys...) {
+@function var_size($keys...) {
 	@return val($size, $keys...);
+}
+
+/// Replaces a substring within another string.
+/// @author Hugo Giraudel
+/// @param {string} $string String.
+/// @param {string} $search Substring.
+/// @param {string} $replace Replacement.
+/// @return {string} Updated string.
+@function str-replace($string, $search, $replace: '') {
+
+	$index: string.index($string, $search);
+
+	@if $index {
+		@return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+	}
+
+	@return $string;
+
+}
+
+/// Replaces a substring within each string in a list.
+/// @param {list} $strings List of strings.
+/// @param {string} $search Substring.
+/// @param {string} $replace Replacement.
+/// @return {list} Updated list of strings.
+@function str-replace-all($strings, $search, $replace: '') {
+
+	@each $string in $strings {
+		$strings: list.set-nth($strings, list.index($strings, $string), str-replace($string, $search, $replace));
+	}
+
+	@return $strings;
+
+}
+
+/// Encodes a SVG data URL so IE doesn't choke (via codepen.io/jakob-e/pen/YXXBrp).
+/// @param {string} $svg SVG data URL.
+/// @return {string} Encoded SVG data URL.
+@function svg-url($svg) {
+
+	$svg: str-replace($svg, '"', '\'');
+	$svg: str-replace($svg, '%', '%25');
+	$svg: str-replace($svg, '<', '%3C');
+	$svg: str-replace($svg, '>', '%3E');
+	$svg: str-replace($svg, '&', '%26');
+	$svg: str-replace($svg, '#', '%23');
+	$svg: str-replace($svg, '{', '%7B');
+	$svg: str-replace($svg, '}', '%7D');
+	$svg: str-replace($svg, ';', '%3B');
+
+	@return url("data:image/svg+xml;charset=utf8,#{$svg}");
+
 }

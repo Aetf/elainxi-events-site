@@ -3,6 +3,7 @@
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
+@use '../libs' as *;
 
 /* Section/Article */
 
@@ -15,7 +16,7 @@
 	header {
 		p {
 			position: relative;
-			margin: (_size(element-margin) * -0.325) 0 (_size(element-margin) * 0.75) 0;
+			margin: (var_size(element-margin) * -0.325) 0 (var_size(element-margin) * 0.75) 0;
 			font-style: italic;
 		}
 
@@ -41,7 +42,7 @@
 	@mixin color-section($p: null) {
 		header {
 			p {
-				color: _palette($p, fg-light);
+				color: var_palette($p, fg-light);
 			}
 		}
 	}

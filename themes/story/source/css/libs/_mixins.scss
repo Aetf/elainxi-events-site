@@ -1,5 +1,8 @@
 @use "sass:list";
 @use "sass:math";
+
+@use 'functions' as *;
+
 /// Makes an element's :before pseudoelement a FontAwesome icon.
 /// @param {string} $content Optional content value to use.
 /// @param {string} $category Optional category to use.
@@ -52,29 +55,11 @@
 
 	$x: 0.1em;
 
-	@if math.unit(_size(element-margin)) == 'rem' {
+	@if math.unit(var_size(element-margin)) == 'rem' {
 		$x: 0.1rem;
 	}
 
-	padding: ($tb + list.nth($pad,1)) ($lr + list.nth($pad,2)) math.max($x, $tb - _size(element-margin) + list.nth($pad,3)) ($lr + list.nth($pad,4)) #{$important};
+	padding: ($tb + list.nth($pad,1)) ($lr + list.nth($pad,2)) math.max($x, $tb - var_size(element-margin) + list.nth($pad,3)) ($lr + list.nth($pad,4)) #{$important};
 
 }
 
-/// Encodes a SVG data URL so IE doesn't choke (via codepen.io/jakob-e/pen/YXXBrp).
-/// @param {string} $svg SVG data URL.
-/// @return {string} Encoded SVG data URL.
-@function svg-url($svg) {
-
-	$svg: str-replace($svg, '"', '\'');
-	$svg: str-replace($svg, '%', '%25');
-	$svg: str-replace($svg, '<', '%3C');
-	$svg: str-replace($svg, '>', '%3E');
-	$svg: str-replace($svg, '&', '%26');
-	$svg: str-replace($svg, '#', '%23');
-	$svg: str-replace($svg, '{', '%7B');
-	$svg: str-replace($svg, '}', '%7D');
-	$svg: str-replace($svg, ';', '%3B');
-
-	@return url("data:image/svg+xml;charset=utf8,#{$svg}");
-
-}

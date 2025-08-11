@@ -3,10 +3,11 @@
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
+@use "sass:math";
+@use '../libs' as *;
 
 /* Items (transitions) */
 
-	@use "sass:math";
 
 .items {
 
@@ -17,24 +18,24 @@
 
 				@if ($event == 'load') {
 					$x: 'body.is-preload &';
-					$y: _duration(on-load);
+					$y: var_duration(on-load);
 				}
 				@else if ($event == 'scroll') {
 					$x: '&.is-inactive';
-					$y: _duration(on-scroll);
+					$y: var_duration(on-scroll);
 				}
 
 				&.on#{$event}-fade-in {
 					> * {
 						> .inner {
 							@include vendor('transition', 'opacity #{$y} ease-in-out');
-							@include vendor('transition-delay', '#{_misc(items-limit) * _duration(items-delay)}');
+							@include vendor('transition-delay', '#{var_misc(items-limit) * var_duration(items-delay)}');
 						}
 
-						@for $i from 0 through _misc(items-limit) {
+						@for $i from 0 through var_misc(items-limit) {
 							&:nth-child(#{$i + 1}) {
 								> .inner {
-									@include vendor('transition-delay', '#{$i * _duration(items-delay)}');
+									@include vendor('transition-delay', '#{$i * var_duration(items-delay)}');
 								}
 							}
 						}
@@ -81,11 +82,11 @@
 		&.#{$name} {
 			> * {
 				&:nth-child(-n + #{$size}) {
-					border-top-width: _size(border-width);
+					border-top-width: var_size(border-width);
 				}
 
 				&:nth-child(#{$size}n + 1) {
-					border-left-width: _size(border-width);
+					border-left-width: var_size(border-width);
 				}
 			}
 		}
@@ -95,46 +96,46 @@
 		@include vendor('display', 'flex');
 		@include vendor('flex-wrap', 'wrap');
 		@include vendor('justify-content', 'center');
-		margin: (_size(element-margin) * 1.5) 0;
+		margin: (var_size(element-margin) * 1.5) 0;
 		position: relative;
 
 		> * {
 			@include vendor('flex-grow', '0');
 			@include vendor('flex-shrink', '0');
 			border-style: solid;
-			border-left-width: _size(border-width);
-			border-top-width: _size(border-width);
+			border-left-width: var_size(border-width);
+			border-top-width: var_size(border-width);
 		}
 
 		// Modifiers.
 
 			// Size.
-				@include items-style1-size(big, 2, _size(gutter));
-				@include items-style1-size(medium, 3, _size(gutter) * 0.625);
-				@include items-style1-size(small, 4, _size(gutter) * 0.375);
+				@include items-style1-size(big, 2, var_size(gutter));
+				@include items-style1-size(medium, 3, var_size(gutter) * 0.625);
+				@include items-style1-size(small, 4, var_size(gutter) * 0.375);
 
 				@include breakpoint('<=large') {
 					@include items-style1-size-reset(small, 4);
-					@include items-style1-size(small, 3, _size(gutter) * 0.625);
+					@include items-style1-size(small, 3, var_size(gutter) * 0.625);
 				}
 
 				@include breakpoint('<=medium') {
 					@include items-style1-size-reset(medium, 3);
-					@include items-style1-size(medium, 2, _size(gutter));
+					@include items-style1-size(medium, 2, var_size(gutter));
 
 					@include items-style1-size-reset(small, 3);
-					@include items-style1-size(small, 2, _size(gutter));
+					@include items-style1-size(small, 2, var_size(gutter));
 				}
 
 				@include breakpoint('<=xsmall') {
 					@include items-style1-size-reset(big, 2);
-					@include items-style1-size(big, 1, _size(gutter) * 0.75);
+					@include items-style1-size(big, 1, var_size(gutter) * 0.75);
 
 					@include items-style1-size-reset(medium, 2);
-					@include items-style1-size(medium, 1, _size(gutter) * 0.75);
+					@include items-style1-size(medium, 1, var_size(gutter) * 0.75);
 
 					@include items-style1-size-reset(small, 2);
-					@include items-style1-size(small, 1, _size(gutter) * 0.75);
+					@include items-style1-size(small, 1, var_size(gutter) * 0.75);
 
 					&.big,
 					&.medium,
@@ -185,11 +186,11 @@
 		&.#{$name} {
 			> * {
 				&:nth-child(-n + #{$size}) {
-					border-top-width: _size(border-width);
+					border-top-width: var_size(border-width);
 				}
 
 				&:nth-child(#{$size}n + 1) {
-					border-left-width: _size(border-width);
+					border-left-width: var_size(border-width);
 				}
 			}
 		}
@@ -199,48 +200,48 @@
 		@include vendor('display', 'flex');
 		@include vendor('flex-wrap', 'wrap');
 		@include vendor('justify-content', 'center');
-		margin: (_size(element-margin) * 1.5) 0;
+		margin: (var_size(element-margin) * 1.5) 0;
 		position: relative;
-		border: solid _size(border-width);
-		border-radius: _size(border-radius);
+		border: solid var_size(border-width);
+		border-radius: var_size(border-radius);
 
 		> * {
 			@include vendor('flex-grow', '0');
 			@include vendor('flex-shrink', '0');
 			border-style: solid;
-			border-left-width: _size(border-width);
-			border-top-width: _size(border-width);
+			border-left-width: var_size(border-width);
+			border-top-width: var_size(border-width);
 		}
 
 		// Modifiers.
 
 			// Size.
-				@include items-style2-size(big, 2, _size(gutter));
-				@include items-style2-size(medium, 3, _size(gutter) * 0.625);
-				@include items-style2-size(small, 4, _size(gutter) * 0.375);
+				@include items-style2-size(big, 2, var_size(gutter));
+				@include items-style2-size(medium, 3, var_size(gutter) * 0.625);
+				@include items-style2-size(small, 4, var_size(gutter) * 0.375);
 
 				@include breakpoint('<=large') {
 					@include items-style2-size-reset(small, 4);
-					@include items-style2-size(small, 3, _size(gutter) * 0.625);
+					@include items-style2-size(small, 3, var_size(gutter) * 0.625);
 				}
 
 				@include breakpoint('<=medium') {
 					@include items-style2-size-reset(medium, 3);
-					@include items-style2-size(medium, 2, _size(gutter));
+					@include items-style2-size(medium, 2, var_size(gutter));
 
 					@include items-style2-size-reset(small, 3);
-					@include items-style2-size(small, 2, _size(gutter));
+					@include items-style2-size(small, 2, var_size(gutter));
 				}
 
 				@include breakpoint('<=xsmall') {
 					@include items-style2-size-reset(big, 2);
-					@include items-style2-size(big, 1, _size(gutter) * 0.75);
+					@include items-style2-size(big, 1, var_size(gutter) * 0.75);
 
 					@include items-style2-size-reset(medium, 2);
-					@include items-style2-size(medium, 1, _size(gutter) * 0.75);
+					@include items-style2-size(medium, 1, var_size(gutter) * 0.75);
 
 					@include items-style2-size-reset(small, 2);
-					@include items-style2-size(small, 1, _size(gutter) * 0.75);
+					@include items-style2-size(small, 1, var_size(gutter) * 0.75);
 				}
 
 	}
@@ -260,7 +261,7 @@
 		@include vendor('display', 'flex');
 		@include vendor('flex-wrap', 'wrap');
 		@include vendor('justify-content', 'center');
-		margin: (_size(element-margin) * 1.5) 0;
+		margin: (var_size(element-margin) * 1.5) 0;
 		position: relative;
 
 		> * {
@@ -271,27 +272,27 @@
 		// Modifiers.
 
 			// Size.
-				@include items-style3-size(big, 2, _size(gutter) * 0.5);
-				@include items-style3-size(medium, 3, _size(gutter) * 0.5 * 0.625);
-				@include items-style3-size(small, 4, _size(gutter) * 0.5 * 0.375);
+				@include items-style3-size(big, 2, var_size(gutter) * 0.5);
+				@include items-style3-size(medium, 3, var_size(gutter) * 0.5 * 0.625);
+				@include items-style3-size(small, 4, var_size(gutter) * 0.5 * 0.375);
 
 				@include breakpoint('<=large') {
-					@include items-style3-size(small, 3, _size(gutter) * 0.5 * 0.625);
+					@include items-style3-size(small, 3, var_size(gutter) * 0.5 * 0.625);
 				}
 
 				@include breakpoint('<=medium') {
-					@include items-style3-size(medium, 2, _size(gutter) * 0.5);
-					@include items-style3-size(small, 2, _size(gutter) * 0.5);
+					@include items-style3-size(medium, 2, var_size(gutter) * 0.5);
+					@include items-style3-size(small, 2, var_size(gutter) * 0.5);
 				}
 
 				@include breakpoint('<=small') {
-					margin: _size(element-margin) 0;
+					margin: var_size(element-margin) 0;
 				}
 
 				@include breakpoint('<=xsmall') {
-					@include items-style3-size(big, 1, _size(gutter) * 0.5 * 0.75);
-					@include items-style3-size(medium, 1, _size(gutter) * 0.5 * 0.75);
-					@include items-style3-size(small, 1, _size(gutter) * 0.5 * 0.75);
+					@include items-style3-size(big, 1, var_size(gutter) * 0.5 * 0.75);
+					@include items-style3-size(medium, 1, var_size(gutter) * 0.5 * 0.75);
+					@include items-style3-size(small, 1, var_size(gutter) * 0.5 * 0.75);
 
 					&.big,
 					&.medium,
@@ -324,15 +325,15 @@
 	@mixin color-items($p: null) {
  		.items.style1 {
  			> * {
-	 			border-color: _palette($p, border);
+	 			border-color: var_palette($p, border);
 	 		}
  		}
 
  		.items.style2 {
- 			border-color: _palette($p, border);
+ 			border-color: var_palette($p, border);
 
  			> * {
-	 			border-color: _palette($p, border);
+	 			border-color: var_palette($p, border);
 	 		}
  		}
 	}

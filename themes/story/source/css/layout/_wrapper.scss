@@ -3,14 +3,34 @@
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
+@use '../libs' as *;
+@use '../components' as *;
+@use '../base/typography' as *;
 
 /* Wrapper */
 
 	@mixin wrapper-color($n) {
 		> .color#{$n} {
-			background-color: _palette(color#{$n});
+			background-color: var_palette(color#{$n});
 		}
 	}
+
+	@mixin _color($p) {
+		@include color-typography($p);
+		@include color-box($p);
+		@include color-button($p);
+		@include color-form($p);
+		@include color-icon($p);
+		@include color-list($p);
+		@include color-section($p);
+		@include color-table($p);
+		@include color-banner($p);
+		@include color-spotlight($p);
+		@include color-gallery($p);
+		@include color-items($p);
+		@include color-index($p);
+	}
+
 
 	#wrapper {
 		background-color: inherit;
@@ -18,7 +38,7 @@
 		overflow-x: hidden;
 
 		> .invert {
-			@include color(invert);
+			@include _color(invert);
 		}
 
 		@include wrapper-color(1);
@@ -31,7 +51,7 @@
 
 		&.divided {
 			> * {
-				box-shadow: inset 0 1px 0 0 _palette(border-alt);
+				box-shadow: inset 0 1px 0 0 var_palette(border-alt);
 
 				&:first-child {
 					box-shadow: none !important;
@@ -39,7 +59,7 @@
 			}
 
 			> .invert {
-				box-shadow: inset 0 1px 0 0 _palette(invert, border-alt);
+				box-shadow: inset 0 1px 0 0 var_palette(invert, border-alt);
 
 				&:first-child {
 					box-shadow: none !important;

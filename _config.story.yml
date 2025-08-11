@@ -31,5 +31,4 @@ attribution:
 # Plugin settings
 sass:
   style: expanded
-  silenceDeprecations:
-  - import
+  silenceDeprecations: []

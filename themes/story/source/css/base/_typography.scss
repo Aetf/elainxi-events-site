@@ -3,6 +3,7 @@
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
+@use '../libs' as *;
 
 /* Type */
 
@@ -27,19 +28,19 @@
 	}
 
 	body {
-		background-color: _palette(bg);
-		color: _palette(fg);
+		background-color: var_palette(bg);
+		color: var_palette(fg);
 	}
 
 	body, input, select, textarea {
-		font-family: _font(family);
+		font-family: var_font(family);
 		font-size: 1rem;
-		font-weight: _font(weight);
+		font-weight: var_font(weight);
 		line-height: 1.65;
 	}
 
 	a {
-		@include vendor('transition', 'color #{_duration(transition)} ease-in-out');
+		@include vendor('transition', 'color #{var_duration(transition)} ease-in-out');
 		text-decoration: underline;
 
 		&:hover {
@@ -48,7 +49,7 @@
 	}
 
 	strong, b {
-		font-weight: _font(weight-bold);
+		font-weight: var_font(weight-bold);
 	}
 
 	em, i {
@@ -56,7 +57,7 @@
 	}
 
 	p {
-		margin: 0 0 _size(element-margin) 0;
+		margin: 0 0 var_size(element-margin) 0;
 
 		&.major {
 			font-size: 1.25rem;
@@ -64,10 +65,10 @@
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-weight: _font(weight);
+		font-weight: var_font(weight);
 		line-height: 1.375;
-		letter-spacing: _font(kerning);
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
+		letter-spacing: var_font(kerning);
+		margin: 0 0 (var_size(element-margin) * 0.5) 0;
 
 		a {
 			color: inherit;
@@ -113,15 +114,15 @@
 	}
 
 	blockquote {
-		border-left: solid (_size(border-width) * 4);
+		border-left: solid (var_size(border-width) * 4);
 		font-style: italic;
-		margin: 0 0 _size(element-margin) 0;
-		padding: (_size(element-margin) * 0.25) 0 (_size(element-margin) * 0.25) _size(element-margin);
+		margin: 0 0 var_size(element-margin) 0;
+		padding: (var_size(element-margin) * 0.25) 0 (var_size(element-margin) * 0.25) var_size(element-margin);
 	}
 
 	code {
-		border-radius: _size(border-radius);
-		font-family: _font(family-fixed);
+		border-radius: var_size(border-radius);
+		font-family: var_font(family-fixed);
 		font-size: 0.9em;
 		margin: 0 0.25rem;
 		padding: 0.25rem 0.325rem;
@@ -129,9 +130,9 @@
 
 	pre {
 		-webkit-overflow-scrolling: touch;
-		font-family: _font(family-fixed);
+		font-family: var_font(family-fixed);
 		font-size: 0.9em;
-		margin: 0 0 _size(element-margin) 0;
+		margin: 0 0 var_size(element-margin) 0;
 
 		code {
 			display: block;
@@ -143,11 +144,11 @@
 
 	hr {
 		border: 0;
-		border-bottom: solid _size(border-width);
-		margin: (_size(element-margin) * 1.25) 0;
+		border-bottom: solid var_size(border-width);
+		margin: (var_size(element-margin) * 1.25) 0;
 
 		&.major {
-			margin: (_size(element-margin) * 1.75) 0;
+			margin: (var_size(element-margin) * 1.75) 0;
 		}
 	}
 
@@ -190,41 +191,41 @@
 	@mixin color-typography($p: null) {
 
 		@if $p != null {
-			background-color: _palette($p, bg);
-			color: _palette($p, fg);
+			background-color: var_palette($p, bg);
+			color: var_palette($p, fg);
 		}
 
 		input, select, textarea {
-			color: _palette($p, fg-bold);
+			color: var_palette($p, fg-bold);
 		}
 
 		a {
-			color: _palette($p, fg-bold);
+			color: var_palette($p, fg-bold);
 
 			&:hover {
-				color: _palette($p, accent);
+				color: var_palette($p, accent);
 			}
 		}
 
 		strong, b {
-			color: _palette($p, fg-bold);
+			color: var_palette($p, fg-bold);
 		}
 
 		h1, h2, h3, h4, h5, h6 {
-			color: _palette($p, fg-bold);
+			color: var_palette($p, fg-bold);
 		}
 
 		blockquote {
-			border-left-color: _palette($p, border);
+			border-left-color: var_palette($p, border);
 		}
 
 		code {
-			background: _palette($p, border-bg);
-			border-color: _palette($p, border);
+			background: var_palette($p, border-bg);
+			border-color: var_palette($p, border);
 		}
 
 		hr {
-			border-bottom-color: _palette($p, border);
+			border-bottom-color: var_palette($p, border);
 		}
 	}
 

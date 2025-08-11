@@ -8,15 +8,9 @@
 
 	/// Breakpoints.
 	/// @var {list}
-	$breakpoints: ();
+	$breakpoints: () !default;
 
 // Mixins.
-
-	/// Sets breakpoints.
-	/// @param {map} $x Breakpoints.
-	@mixin breakpoints($x: ()) {
-		$breakpoints: $x !global;
-	}
 
 	/// Wraps @content in a @media block targeting a specific orientation.
 	/// @param {string} $orientation Orientation.

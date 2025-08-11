@@ -1,9 +1,11 @@
-@use "sass:color";
 ///
 /// Story by HTML5 UP
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
+@use "sass:color";
+@use '../libs' as *;
+
 
 /* Banner (transitions) */
 
@@ -16,11 +18,11 @@
 
 				@if ($event == 'load') {
 					$x: 'body.is-preload &';
-					$y: _duration(on-load);
+					$y: var_duration(on-load);
 				}
 				@else if ($event == 'scroll') {
 					$x: '&.is-inactive';
-					$y: _duration(on-scroll);
+					$y: var_duration(on-scroll);
 				}
 
 				// Content.
@@ -239,12 +241,12 @@
 		overflow-x: hidden;
 
 		.content {
-			@include padding(_size(padding, default), _size(padding, default));
+			@include padding(var_size(padding, default), var_size(padding, default));
 			@include vendor('align-self', 'center');
 			@include vendor('flex-grow', '1');
 			@include vendor('flex-shrink', '1');
 			width: 50%;
-			max-width: (_size(inner) * 0.75);
+			max-width: (var_size(inner) * 0.75);
 			margin: 0 auto;
 		}
 
@@ -269,25 +271,25 @@
 
 		@include breakpoint('<=xlarge') {
 			.content {
-				@include padding(_size(padding, xlarge), _size(padding, xlarge));
+				@include padding(var_size(padding, xlarge), var_size(padding, xlarge));
 			}
 		}
 
 		@include breakpoint('<=large') {
 			.content {
-				@include padding(_size(padding, large), _size(padding, large));
+				@include padding(var_size(padding, large), var_size(padding, large));
 			}
 		}
 
 		@include breakpoint('<=medium') {
 			.content {
-				@include padding(_size(padding, medium) * 1.25, _size(padding, medium));
+				@include padding(var_size(padding, medium) * 1.25, var_size(padding, medium));
 			}
 		}
 
 		@include breakpoint('<=small') {
 			.content {
-				@include padding(_size(padding, small) * 1.25, _size(padding, small));
+				@include padding(var_size(padding, small) * 1.25, var_size(padding, small));
 			}
 		}
 
@@ -387,7 +389,7 @@
 /* Banner (style2) */
 
 	.banner.style2 {
-		@include padding(_size(padding, default) * 0.75, _size(padding, default) * 0.75);
+		@include padding(var_size(padding, default) * 0.75, var_size(padding, default) * 0.75);
 		@include vendor('align-items', 'center');
 		@include vendor('display', 'flex');
 		@include vendor('justify-content', 'center');
@@ -397,13 +399,13 @@
 		overflow-x: hidden;
 
 		.content {
-			@include padding(_size(padding, default) * 0.75, _size(padding, default) * 0.75);
+			@include padding(var_size(padding, default) * 0.75, var_size(padding, default) * 0.75);
 			position: relative;
-			width: (_size(inner) * 0.625);
+			width: (var_size(inner) * 0.625);
 			max-width: 100%;
 			background-color: inherit;
-			border-radius: _size(border-radius-alt);
-			margin-bottom: _size(element-margin);
+			border-radius: var_size(border-radius-alt);
+			margin-bottom: var_size(element-margin);
 			z-index: 1;
 		}
 
@@ -431,34 +433,34 @@
 		}
 
 		@include breakpoint('<=xlarge') {
-			@include padding(_size(padding, xlarge) * 0.75, _size(padding, xlarge) * 0.75);
+			@include padding(var_size(padding, xlarge) * 0.75, var_size(padding, xlarge) * 0.75);
 
 			.content {
-				@include padding(_size(padding, xlarge) * 0.75, _size(padding, xlarge) * 0.75);
+				@include padding(var_size(padding, xlarge) * 0.75, var_size(padding, xlarge) * 0.75);
 			}
 		}
 
 		@include breakpoint('<=large') {
-			@include padding(_size(padding, large), _size(padding, large) * 0.75);
+			@include padding(var_size(padding, large), var_size(padding, large) * 0.75);
 
 			.content {
-				@include padding(_size(padding, large), _size(padding, large) * 0.75);
+				@include padding(var_size(padding, large), var_size(padding, large) * 0.75);
 			}
 		}
 
 		@include breakpoint('<=medium') {
-			@include padding(_size(padding, medium), _size(padding, medium));
+			@include padding(var_size(padding, medium), var_size(padding, medium));
 
 			.content {
-				@include padding(_size(padding, medium) * 1.25, _size(padding, medium) * 0.75);
+				@include padding(var_size(padding, medium) * 1.25, var_size(padding, medium) * 0.75);
 			}
 		}
 
 		@include breakpoint('<=small') {
-			@include padding(_size(padding, small), _size(padding, small));
+			@include padding(var_size(padding, small), var_size(padding, small));
 
 			.content {
-				@include padding(_size(padding, small) * 1.25, _size(padding, small) * 0.75);
+				@include padding(var_size(padding, small) * 1.25, var_size(padding, small) * 0.75);
 			}
 		}
 
@@ -538,9 +540,9 @@
 
 	.banner.style3 {
 		$image-size: 21rem;
-		$content-size: (_size(inner) * 0.875) - $image-size - (_size(element-margin) * 1.75);
+		$content-size: (var_size(inner) * 0.875) - $image-size - (var_size(element-margin) * 1.75);
 
-		@include padding(_size(padding, default), _size(padding, default));
+		@include padding(var_size(padding, default), var_size(padding, default));
 		@include vendor('align-items', 'center');
 		@include vendor('display', 'flex');
 		@include vendor('flex-direction', 'row-reverse');
@@ -560,7 +562,7 @@
 			width: $image-size;
 			height: $image-size;
 			border-radius: 100%;
-			margin: 0 (_size(element-margin) * 1.75) _size(element-margin) 0;
+			margin: 0 (var_size(element-margin) * 1.75) var_size(element-margin) 0;
 
 			img {
 				@include vendor('object-fit', 'cover');
@@ -573,15 +575,15 @@
 		}
 
 		@include breakpoint('<=xlarge') {
-			@include padding(_size(padding, xlarge), _size(padding, xlarge));
+			@include padding(var_size(padding, xlarge), var_size(padding, xlarge));
 		}
 
 		@include breakpoint('<=large') {
-			@include padding(_size(padding, large), _size(padding, large));
+			@include padding(var_size(padding, large), var_size(padding, large));
 		}
 
 		@include breakpoint('<=medium') {
-			@include padding(_size(padding, medium) * 1.25, _size(padding, medium));
+			@include padding(var_size(padding, medium) * 1.25, var_size(padding, medium));
 
 			.image {
 				width: ($image-size * 0.875);
@@ -590,13 +592,13 @@
 		}
 
 		@include breakpoint('<=small') {
-			@include padding(_size(padding, small) * 1.25, _size(padding, small));
+			@include padding(var_size(padding, small) * 1.25, var_size(padding, small));
 			@include vendor('align-items', 'flex-start');
 
 			.image {
 				width: ($image-size * 0.75);
 				height: ($image-size * 0.75);
-				margin: 0 (_size(element-margin) * 1) _size(element-margin) 0;
+				margin: 0 (var_size(element-margin) * 1) var_size(element-margin) 0;
 			}
 		}
 
@@ -627,12 +629,12 @@
 					@include vendor('flex-direction', 'row');
 
 					.image {
-						margin: 0 0 _size(element-margin) (_size(element-margin) * 1.75);
+						margin: 0 0 var_size(element-margin) (var_size(element-margin) * 1.75);
 					}
 
 					@include breakpoint('<=small') {
 						.image {
-							margin: 0 0 _size(element-margin) (_size(element-margin) * 1);
+							margin: 0 0 var_size(element-margin) (var_size(element-margin) * 1);
 						}
 					}
 
@@ -689,9 +691,9 @@
 
 	.banner.style4 {
 		$image-width: 13rem;
-		$content-size: (_size(inner) * 0.75) - $image-width - (_size(element-margin) * 1.75);
+		$content-size: (var_size(inner) * 0.75) - $image-width - (var_size(element-margin) * 1.75);
 
-		@include padding(_size(padding, default), _size(padding, default));
+		@include padding(var_size(padding, default), var_size(padding, default));
 		@include vendor('align-items', 'center');
 		@include vendor('display', 'flex');
 		@include vendor('flex-direction', 'row-reverse');
@@ -707,19 +709,19 @@
 
 		.image {
 			@include phone($image-width);
-			margin-right: (_size(element-margin) * 1.75);
+			margin-right: (var_size(element-margin) * 1.75);
 		}
 
 		@include breakpoint('<=xlarge') {
-			@include padding(_size(padding, xlarge), _size(padding, xlarge));
+			@include padding(var_size(padding, xlarge), var_size(padding, xlarge));
 		}
 
 		@include breakpoint('<=large') {
-			@include padding(_size(padding, large), _size(padding, large));
+			@include padding(var_size(padding, large), var_size(padding, large));
 		}
 
 		@include breakpoint('<=medium') {
-			@include padding(_size(padding, medium) * 1.25, _size(padding, medium));
+			@include padding(var_size(padding, medium) * 1.25, var_size(padding, medium));
 
 			.image {
 				@include resize-phone($image-width, 0.875);
@@ -727,7 +729,7 @@
 		}
 
 		@include breakpoint('<=small') {
-			@include padding(_size(padding, small) * 1.25, _size(padding, small));
+			@include padding(var_size(padding, small) * 1.25, var_size(padding, small));
 			@include vendor('align-items', 'flex-start');
 
 			.image {
@@ -773,7 +775,7 @@
 
 					.image {
 						margin-right: 0;
-						margin-left: (_size(element-margin) * 1.75);
+						margin-left: (var_size(element-margin) * 1.75);
 					}
 
 					@include orientation(portrait) {
@@ -829,7 +831,7 @@
 /* Banner (style5) */
 
 	.banner.style5 {
-		@include padding(_size(padding, default), _size(padding, default));
+		@include padding(var_size(padding, default), var_size(padding, default));
 		@include vendor('align-items', 'center');
 		@include vendor('display', 'flex');
 		@include vendor('justify-content', 'center');
@@ -840,9 +842,9 @@
 
 		.content {
 			position: relative;
-			width: (_size(inner) * 0.625);
+			width: (var_size(inner) * 0.625);
 			max-width: 100%;
-			margin-bottom: _size(element-margin);
+			margin-bottom: var_size(element-margin);
 			z-index: 1;
 		}
 
@@ -855,7 +857,7 @@
 			top: 0;
 			left: 0;
 			border-radius: 0;
-			opacity: _misc(overlay-opacity);
+			opacity: var_misc(overlay-opacity);
 
 			img {
 				@include vendor('object-fit', 'cover');
@@ -871,19 +873,19 @@
 		}
 
 		@include breakpoint('<=xlarge') {
-			@include padding(_size(padding, xlarge), _size(padding, xlarge));
+			@include padding(var_size(padding, xlarge), var_size(padding, xlarge));
 		}
 
 		@include breakpoint('<=large') {
-			@include padding(_size(padding, large), _size(padding, large));
+			@include padding(var_size(padding, large), var_size(padding, large));
 		}
 
 		@include breakpoint('<=medium') {
-			@include padding(_size(padding, medium) * 1.25, _size(padding, medium));
+			@include padding(var_size(padding, medium) * 1.25, var_size(padding, medium));
 		}
 
 		@include breakpoint('<=small') {
-			@include padding(_size(padding, small) * 1.25, _size(padding, small));
+			@include padding(var_size(padding, small) * 1.25, var_size(padding, small));
 		}
 
 		// Modifiers.
@@ -934,13 +936,13 @@
 	@mixin color-banner($p: null) {
 		.banner {
 			.image {
-				background-color: color.adjust(_palette($p, fg-bold), $alpha: -0.875);
+				background-color: color.adjust(var_palette($p, fg-bold), $alpha: -0.875);
 			}
 
 			@if ($p != 'invert') {
 				&.invert {
 					.image {
-						background-color: color.adjust(_palette(invert, fg-bold), $alpha: -0.875);
+						background-color: color.adjust(var_palette(invert, fg-bold), $alpha: -0.875);
 					}
 				}
 			}

@@ -1,0 +1,118 @@
+@use 'sass:math';
+
+@use 'vendor' as *;
+@use 'functions' as *;
+
+// Phone.
+
+	@mixin phone($image-width) {
+		@include vendor('flex-grow', '0');
+		@include vendor('flex-shrink', '0');
+		border-radius: 0;
+		border: solid var_size(border-width);
+
+		img {
+			@include vendor('object-fit', 'cover');
+			@include vendor('object-position', 'center');
+			display: block;
+			width: 100%;
+			height: 100%;
+			border-radius: 0;
+		}
+
+		&:before {
+			content: '';
+			display: block;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: solid var_size(border-width);
+			border-bottom: 0;
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			background-position: center;
+			background-repeat: no-repeat;
+			border: solid var_size(border-width);
+			border-top: 0;
+		}
+
+		@include resize-phone($image-width, 1);
+	}
+
+	@mixin resize-phone($image-width, $image-factor) {
+		$image-pad-top: 2.5rem;
+		$image-pad-bottom: 3rem;
+		$image-height: ($image-width * math.div(1920, 1080));
+
+		width: ($image-width * $image-factor);
+		height: (($image-width * $image-factor) * math.div(1920, 1080));
+		margin-top: ($image-pad-top * $image-factor);
+		margin-bottom: (var_size(element-margin) + ($image-pad-bottom * $image-factor));
+
+		&:before {
+			height: ($image-pad-top * $image-factor);
+			background-size: (64px * $image-factor) (32px * $image-factor);
+			margin-top: (($image-pad-top * $image-factor) * -1);
+			border-radius: (1rem * $image-factor) (1rem * $image-factor) 0 0;
+		}
+
+		&:after {
+			height: ($image-pad-bottom * $image-factor);
+			background-size: (64px * $image-factor) (32px * $image-factor);
+			margin-bottom: (($image-pad-bottom * $image-factor) * -1);
+			border-radius: 0 0 (1rem * $image-factor) (1rem * $image-factor);
+		}
+	}
+
+	@mixin color-phone($p) {
+		border-color: var_palette($p, border);
+		background-color: var_palette($p, border);
+
+		@if ($p != 'invert') {
+			border-width: 0;
+		}
+		@else {
+			border-width: var_size(border-width);
+		}
+
+		&:before {
+			background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="32px" viewBox="0 0 64 32" zoomAndPan="disable"><style>rect {fill: transparent; stroke: #{var_palette($p, border)}; stroke-width: #{var_size(border-width)}; }</style><rect rx="4" ry="4" x="11" y="12" width="42" height="8" vector-effect="non-scaling-stroke" /></svg>');
+			border-color: var_palette($p, border);
+
+			@if ($p == 'invert') {
+				width: calc(100% + #{var_size(border-width) * 2});
+				margin-left: (var_size(border-width) * -1);
+			}
+			@else {
+				width: 100%;
+			}
+		}
+
+		&:after {
+			background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="32px" viewBox="0 0 64 32" zoomAndPan="disable"><style>circle {fill: transparent; stroke: #{var_palette($p, border)}; stroke-width: #{var_size(border-width)}; }</style><circle cx="32" cy="16" r="14" vector-effect="non-scaling-stroke" /></svg>');
+			border-color: var_palette($p, border);
+
+			@if ($p == 'invert') {
+				width: calc(100% + #{var_size(border-width) * 2});
+				margin-left: (var_size(border-width) * -1);
+			}
+			@else {
+				width: 100%;
+			}
+		}
+	}
+
+	@mixin color-phone-variant($v, $p) {
+		@if ($v == 'android') {
+			&:after {
+				background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="32px" viewBox="0 0 64 32" zoomAndPan="disable"><style>rect {fill: transparent; stroke: #{var_palette($p, border)}; stroke-width: #{var_size(border-width)}; }</style><rect rx="4" ry="4" x="6" y="4" width="52" height="24" vector-effect="non-scaling-stroke" /></svg>');
+			}
+		}
+		@else if ($p == 'iphone') {
+			// ...
+		}
+	}
+
+

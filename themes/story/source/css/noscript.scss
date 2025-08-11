@@ -1,9 +1,4 @@
-@import 'libs/vars';
-@import 'libs/functions';
-@import 'libs/mixins';
-@import 'libs/vendor';
-@import 'libs/breakpoints';
-@import 'libs/html-grid';
+@use 'libs' as *;
 
 /*
 	Story by HTML5 UP
@@ -22,11 +17,11 @@
 
 				@if ($event == 'load') {
 					$x: 'body.is-preload &';
-					$y: _duration(on-load);
+					$y: var_duration(on-load);
 				}
 				@else if ($event == 'scroll') {
 					$x: '&.is-inactive';
-					$y: _duration(on-scroll);
+					$y: var_duration(on-scroll);
 				}
 
 				// Content.

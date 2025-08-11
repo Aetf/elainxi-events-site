@@ -3,18 +3,19 @@
 /// html5up.net | @ajlkn
 /// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 ///
+@use '../libs' as *;
 
 /* Image */
 
 	.image {
 		border: 0;
-		border-radius: _size(border-radius);
+		border-radius: var_size(border-radius);
 		display: inline-block;
 		position: relative;
 
 		img {
 			display: block;
-			border-radius: _size(border-radius);
+			border-radius: var_size(border-radius);
 		}
 
 		&.left,
@@ -41,7 +42,7 @@
 
 		&.fit {
 			display: block;
-			margin: 0 0 _size(element-margin) 0;
+			margin: 0 0 var_size(element-margin) 0;
 			width: 100%;
 
 			img {
@@ -51,7 +52,7 @@
 
 		&.main {
 			display: block;
-			margin: 0 0 (_size(element-margin) * 1.5) 0;
+			margin: 0 0 (var_size(element-margin) * 1.5) 0;
 			width: 100%;
 
 			img {

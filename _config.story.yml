@@ -32,3 +32,5 @@ attribution:
 sass:
   style: expanded
   silenceDeprecations: []
+  loadPaths:
+  - node_modules

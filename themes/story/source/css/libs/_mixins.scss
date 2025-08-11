@@ -1,43 +1,29 @@
 @use "sass:list";
 @use "sass:math";
 
+@use '@fortawesome/fontawesome-free/scss/fa' as fa;
+@use '@fortawesome/fontawesome-free/scss/solid' as fa-solid;
+@use '@fortawesome/fontawesome-free/scss/brands' as fa-brands;
+@use '@fortawesome/fontawesome-free/scss/regular' as fa-regular;
+
 @use 'functions' as *;
 
 /// Makes an element's :before pseudoelement a FontAwesome icon.
-/// @param {string} $content Optional content value to use.
 /// @param {string} $category Optional category to use.
-/// @param {string} $where Optional pseudoelement to target (before or after).
-@mixin icon($content: false, $category: regular, $where: before) {
-
-	text-decoration: none;
-
-	&:#{$where} {
-
-		@if $content {
-			content: $content;
-		}
-
-		-moz-osx-font-smoothing: grayscale;
-		-webkit-font-smoothing: antialiased;
-		display: inline-block;
-		font-style: normal;
-		font-variant: normal;
-		text-rendering: auto;
-		line-height: 1;
-		text-transform: none !important;
-
+@mixin icon($category: regular) {
+	&::before {
 		@if ($category == brands) {
-			font-family: 'Font Awesome 5 Brands';
+			@include fa-brands.icon(fa.$var-question);
 		}
 		@else if ($category == solid) {
-			font-family: 'Font Awesome 5 Free';
-			font-weight: 900;
+			@include fa-solid.icon(fa.$var-question);
 		}
 		@else {
-			font-family: 'Font Awesome 5 Free';
-			font-weight: 400;
+			@include fa-regular.icon(fa.$var-question);
 		}
 
+		content: var(#{fa.$icon-property});
+		content: var(#{fa.$icon-property})/"";
 	}
 
 }

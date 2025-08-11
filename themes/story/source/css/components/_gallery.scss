@@ -5,6 +5,9 @@
 ///
 @use "sass:math";
 @use "sass:color";
+
+@use '@fortawesome/fontawesome-free/scss/fa' as fa;
+
 @use '../libs' as *;
 @use '../base/typography' as *;
 @use 'button' as *;
@@ -284,7 +287,7 @@
 		background-color: transparent;
 
 		> .forward, >.backward {
-			@include icon(false, solid);
+			@include icon(solid);
 			@include vendor('transition', 'opacity #{var_duration(transition)} ease-in-out');
 			position: absolute;
 			top: 0;
@@ -317,7 +320,7 @@
 			background-image: linear-gradient(to left, rgba(0,0,0,0.25) 15%, rgba(0,0,0,0));
 
 			&:before {
-				content: '\f105';
+				content: fa.fa-content(fa.$var-angle-right);
 				right: 0;
 			}
 		}
@@ -327,7 +330,7 @@
 			background-image: linear-gradient(to right, rgba(0,0,0,0.25) 15%, rgba(0,0,0,0));
 
 			&:before {
-				content: '\f104';
+				content: fa.fa-content(fa.$var-angle-left);
 				left: 0;
 			}
 		}

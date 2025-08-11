@@ -3,6 +3,12 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+@use '@fortawesome/fontawesome-free/scss/variables' with (
+    // customizing $font-path - make sure it points to where your webfonts are stored in your project
+  $font-path: '/fonts',
+);
+@use '@fortawesome/fontawesome-free/scss/fontawesome';
+@use '@fortawesome/fontawesome-free/scss/fa' as fa;
 
 @use 'libs' with (
 	$breakpoints: (
@@ -25,6 +31,6 @@
 
 @use 'layout/wrapper';
 
-@import 'fontawesome-all.min.css';
+// @import 'fontawesome-all.min.css';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i');
 

@@ -9,7 +9,7 @@
 /* Icon */
 
 	.icon {
-		@include icon;
+		@include icon(regular);
 		border-bottom: none;
 		position: relative;
 		text-align: center;
@@ -23,15 +23,11 @@
 		}
 
 		&.solid {
-			&:before {
-				font-weight: 900;
-			}
+			@include icon(solid);
 		}
 
 		&.brands {
-			&:before {
-				font-family: 'Font Awesome 5 Brands';
-			}
+			@include icon(brands);
 		}
 
 		&.style2 {

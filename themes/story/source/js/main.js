@@ -122,6 +122,135 @@
 
 				}
 			});
+// Nav.
+		var $nav = $('#nav');
+
+		if ($nav.length > 0) {
+
+			// Shrink effect.
+		/*
+			$('#nav + section')
+				.scrollex({
+				mode: 'top',
+				enter: function() {
+					$nav.addClass('alt');
+					$nav.addClass('fixed');
+				},
+				leave: function() {
+					$nav.removeClass('alt');
+					$nav.removeClass('fixed');
+				}
+			});
+			*/
+				var navOffsetTop = $nav.offset().top; // Get the initial distance of the nav from the top of the document
+
+				$window.on('scroll', function() {
+
+				  // We check if the window's scroll position is greater than the nav's initial position.
+				  // This is more performant than using getBoundingClientRect on every scroll tick.
+				  if ($window.scrollTop() > navOffsetTop) {
+					$nav.addClass('alt');
+					$nav.addClass('fixed');
+				  } else {
+					$nav.removeClass('alt');
+					$nav.removeClass('fixed');
+				  }
+
+				}).trigger('scroll'); // Trigger the scroll event on page load to set the initial state
+
+		/*
+				$nav.next()
+					.scrollex({
+						mode: 'top',
+						enter: function() {
+							$nav.addClass('alt');
+						},
+						leave: function() {
+							$nav.removeClass('alt');
+						},
+					});
+		*/
+
+		/*
+				const observer = new IntersectionObserver((entries, observer) => {
+				  entries.forEach(entry => {
+					$nav.toggleClass('alt', entry.boundingClientRect.top < entry.rootBounds.top - 1);
+					$nav.toggleClass('fixed', entry.boundingClientRect.top <= entry.rootBounds.top);
+					console.log("isIntersecting?", entry);
+				  });
+				}, {threshold: 0, rootMargin: '0px 0px -100% 0px'});
+				observer.observe(document.querySelector('#nav + section'));
+		*/
+			// Links.
+				var $nav_a = $nav.find('a');
+
+				$nav_a
+					.scrolly({
+						speed: 1000,
+						offset: function() { return $nav.height(); }
+					})
+					.on('click', function() {
+
+						var $this = $(this);
+
+						// External link? Bail.
+							if ($this.attr('href').charAt(0) != '#')
+								return;
+
+						// Deactivate all links.
+							$nav_a
+								.removeClass('active')
+								.removeClass('active-locked');
+
+						// Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
+							$this
+								.addClass('active')
+								.addClass('active-locked');
+
+					})
+					.each(function() {
+
+						var	$this = $(this),
+							id = $this.attr('href'),
+							$section = $(id);
+
+						// No section for this link? Bail.
+							if ($section.length < 1)
+								return;
+
+						// Scrollex.
+							$section.scrollex({
+								mode: 'middle',
+								initialize: function() {
+
+									// Deactivate section.
+										if (browser.canUse('transition'))
+											$section.addClass('is-inactive');
+
+								},
+								enter: function() {
+
+									// Activate section.
+										$section.removeClass('is-inactive');
+
+									// No locked links? Deactivate all links and activate this section's one.
+										if ($nav_a.filter('.active-locked').length == 0) {
+
+											$nav_a.removeClass('active');
+											$this.addClass('active');
+
+										}
+
+									// Otherwise, if this section's link is the one that's locked, unlock it.
+										else if ($this.hasClass('active-locked'))
+											$this.removeClass('active-locked');
+
+								}
+							});
+
+					});
+
+		}
 
 	// Items.
 		$('.items')

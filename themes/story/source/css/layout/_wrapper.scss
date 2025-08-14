@@ -35,7 +35,7 @@
 	#wrapper {
 		background-color: inherit;
 		width: 100%;
-		overflow-x: hidden;
+		//overflow-x: hidden;
 
 		> .invert {
 			@include _color(invert);

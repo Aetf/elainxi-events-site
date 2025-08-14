@@ -1,0 +1,103 @@
+///
+/// Stellar by HTML5 UP
+/// html5up.net | @ajlkn
+/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+///
+@use 'sass:color';
+
+@use '../libs' as *;
+@use '../base/typography' as *;
+
+/* Nav */
+	#nav {
+		@include vendor('transition', (
+			'background-color #{var_duration(transition)} ease',
+			'border-top-left-radius #{var_duration(transition)} ease',
+			'border-top-right-radius #{var_duration(transition)} ease',
+			'padding #{var_duration(transition)} ease',
+		));
+		@include color-typography;
+		width: 100%;
+		// max-width: calc(100% - #{var_size(element-margin) * 2});
+		position: absolute;
+		// top: 0px;
+		padding: 1em;
+		background-color: var_palette(bg-alt);
+		border-top-left-radius: var_size(border-radius);
+		border-top-right-radius: var_size(border-radius);
+		cursor: default;
+		text-align: center;
+
+		& + section {
+			padding-top: 4.25em;
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			li {
+				@include vendor('transition', (
+					'margin #{_duration(transition)} ease'
+				));
+				display: inline-block;
+				margin: 0 0.35em;
+				padding: 0;
+				vertical-align: middle;
+
+				a {
+					@include vendor('transition', (
+						'font-size #{_duration(transition)} ease'
+					));
+					display: inline-block;
+					height: 2.25em;
+					line-height: 2.25em;
+					padding: 0 1.25em;
+					border: 0;
+					border-radius: var_size(border-radius);
+					box-shadow: inset 0 0 0 1px transparent;
+
+					&:hover {
+						background-color: var_palette(border-bg);
+					}
+
+					&.active {
+						background-color: var_palette(bg);
+						box-shadow: none;
+					}
+				}
+			}
+		}
+
+		&.fixed {
+			position: fixed;
+			top: 0px;
+			z-index: var_misc(z-index-base);
+			background-color: color.adjust(var_palette(bg-alt), $alpha: -0.05);
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
+
+		&.alt {
+			padding: 0.5em 1em;
+
+			ul {
+				li {
+					margin: 0 0.175em;
+
+					a {
+						font-size: 0.9em;
+					}
+				}
+			}
+		}
+
+		@include breakpoint('<=small') {
+			display: none;
+
+			& + #main {
+				padding-top: 0;
+			}
+		}
+	}

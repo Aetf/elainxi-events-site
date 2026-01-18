@@ -1,0 +1,10 @@
+plugins:
+  - prettier-plugin-jinja-template
+
+overrides:
+  - files: "*.html"
+    options:
+      parser: jinja-template
+  - files: "*.njk"
+    options:
+      parser: jinja-template

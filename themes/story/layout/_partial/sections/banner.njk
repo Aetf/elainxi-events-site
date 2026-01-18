@@ -1,0 +1,31 @@
+{% set style = options.style if options.style else "style1" %}
+{% set orient = "orient-" + options.orient if options.orient else "orient-left" %}
+{% set content_align = "content-align-" + options.content_align if options.content_align else "content-align-left" %}
+{% set image_position = "image-position-" + options.image_position if options.image_position else "image-position-right" %}
+
+<section
+  class="banner fullscreen onload-image-fade-in onload-content-fade-right {{ style }} {{ orient }} {{ content_align }} {{ image_position }}"
+>
+  <div class="content">
+    {{ content | safe }}
+    {% if actions %}
+      <ul class="actions stacked">
+        {% for action in actions %}
+          <li>
+            <a
+              href="{{ action.url }}"
+              class="button {{ 'primary' if action.type == 'primary' }} {{ action.size if action.size and action.size != 'default' }} {{ action.width if action.width and action.width != 'default' }} {{ 'smooth-scroll-middle' if action.scroll_to }} {{ 'icon ' + action.icon if action.icon }}"
+            >
+              {{ action.label }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+  {% if image %}
+    <div class="image">
+      <img src="{{ image }}" alt="" />
+    </div>
+  {% endif %}
+</section>

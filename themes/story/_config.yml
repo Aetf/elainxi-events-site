@@ -1,0 +1,19 @@
+# Menu
+menu:
+  Introduction: "#intro"
+  First Section: "#first"
+  Second Section: "#second"
+  Get Started: "#cta"
+
+# Theme Content Configuration
+sections:
+  banner:
+    actions:
+      - label: Get Started
+        url: "#first"
+        # Semantic options
+        type: default # default, primary
+        size: large # default, large, small
+        width: wide # default, wide, fit
+        scroll_to: true # Adds 'smooth-scroll-middle' class
+        icon: # Optional icon class (e.g. search, download)

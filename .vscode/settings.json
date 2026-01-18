@@ -1,0 +1,11 @@
+{
+    "emmet.includeLanguages": {
+        "njk": "html"
+    },
+    "emmet.syntaxProfiles": {
+        "njk": "html"
+    },
+    "prettier.prettierPath": "./node_modules/prettier",
+    "prettier.tabWidth": 4,
+    "prettier.singleAttributePerLine": true
+}

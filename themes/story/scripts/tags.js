@@ -1,0 +1,222 @@
+/* global hexo */
+'use strict';
+
+/**
+ * Major tag
+ * Used for major text in intro
+ * Syntax: {% major %} text {% endmajor %}
+ */
+hexo.extend.tag.register('major', function (args, content) {
+    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
+    // Strip the outer paragraph tag which Hexo's markdown engine adds
+    text = text.trim().replace(/^<p>/, '').replace(/<\/p>$/, '');
+    return '<p class="major">' + text + '</p>';
+}, { ends: true });
+
+/**
+ * AsBanner tag
+ * Transform preceding content into a banner section
+ * Syntax: {% asbanner h1 images/banner.jpg [options] %}
+ */
+hexo.extend.tag.register('asbanner', function (args) {
+    var boundary = args[0]; // e.g., 'h1'
+    var image = args[1];    // e.g., 'images/banner.jpg'
+    
+    // Parse options: key:value|key:value
+    var options = {};
+    for (var i = 2; i < args.length; i++) {
+        var parts = args[i].split(':');
+        if (parts.length === 2) {
+            options[parts[0]] = parts[1];
+        }
+    }
+
+    // Output hidden marker with data
+    return '<div class="crs-section-marker" ' + 
+           'data-type="banner" ' +
+           'data-boundary="' + boundary + '" ' +
+           'data-image="' + image + '" ' +
+           "data-options='" + JSON.stringify(options) + "'></div>";
+});
+
+/**
+ * Spotlight Tag
+ * Usage: {% spotlight class:style1|orient-right id:first image:path/to/image.jpg %} content {% endspotlight %}
+ */
+/**
+ * Spotlight Tag
+ * Usage: {% spotlight position:left|right id:myid image:path/to/image.jpg %} content {% endspotlight %}
+ */
+hexo.extend.tag.register('spotlight', function (args, content) {
+    var imageSrc = '';
+    var position = 'right'; // default
+    var id = '';
+
+    args.forEach(function (arg) {
+        if (arg.startsWith('image:')) {
+            imageSrc = arg.substring(6);
+        } else if (arg.startsWith('position:')) {
+            position = arg.substring(9);
+        } else if (arg.startsWith('id:')) {
+            id = arg.substring(3);
+        }
+    });
+
+    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
+    var view = hexo.theme.getView('_partial/sections/spotlight.njk');
+    
+    return view.renderSync({
+        content: text,
+        image: imageSrc,
+        position: position,
+        id: id
+    });
+}, { ends: true });
+
+/**
+ * Gallery Tag
+ * Usage: {% gallery class:style2|medium lightbox:true %} ... {% endgallery %}
+ */
+hexo.extend.tag.register('gallery', function (args, content) {
+    var className = '';
+    var lightbox = false;
+
+    args.forEach(function (arg) {
+        if (arg.startsWith('class:')) {
+            className += ' ' + arg.substring(6).replace(/\|/g, ' ');
+        } else if (arg === 'lightbox:true') {
+            lightbox = true;
+        }
+    });
+
+    // Content is already HTML from gallery_item tags, do not re-render as markdown
+    var view = hexo.theme.getView('_partial/sections/gallery.njk');
+
+    return view.renderSync({
+        content: content,
+        class: className,
+        lightbox: lightbox
+    });
+}, { ends: true });
+
+hexo.extend.tag.register('gallery_item', function (args, content) {
+    // {% gallery_item src:full.jpg thumb:thumb.jpg title:"My Title" %} Caption {% endgallery_item %}
+    var src = '';
+    var thumb = '';
+    var title = '';
+
+    args.forEach(function (arg) {
+        if (arg.startsWith('src:')) src = arg.substring(4);
+        if (arg.startsWith('thumb:')) thumb = arg.substring(6);
+        if (arg.startsWith('title:')) title = arg.substring(6).replace(/_/g, ' '); // simple hack for spaces
+    });
+
+    // If thumb is missing, use src
+    if (!thumb) thumb = src;
+    if (title.startsWith('"') && title.endsWith('"')) title = title.substring(1, title.length - 1);
+
+    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
+    var view = hexo.theme.getView('_partial/sections/gallery_item.njk');
+
+    return view.renderSync({
+        content: text,
+        src: src,
+        thumb: thumb,
+        title: title
+    });
+}, { ends: true });
+
+
+/**
+ * Wrapper/Items Tag
+ * Usage: {% wrapper class:style1|align-center %} ... {% endwrapper %}
+ */
+hexo.extend.tag.register('wrapper', function (args, content) {
+    var className = 'wrapper';
+    var id = '';
+    
+    args.forEach(function (arg) {
+        if (arg.startsWith('class:')) {
+            className += ' ' + arg.substring(6).replace(/\|/g, ' ');
+        } else if (arg.startsWith('id:')) {
+            id = arg.substring(3);
+        }
+    });
+    
+    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
+    var view = hexo.theme.getView('_partial/sections/wrapper.njk');
+
+    return view.renderSync({
+        content: text,
+        class: className,
+        id: id
+    });
+}, { ends: true });
+
+
+hexo.extend.tag.register('items', function (args, content) {
+    var className = '';
+    var onscroll = false;
+    
+    args.forEach(function (arg) {
+        if (arg.startsWith('class:')) {
+            var classes = arg.substring(6).split('|');
+            classes.forEach(function(c) {
+                if (c === 'onscroll-fade-in') onscroll = true;
+                else className += ' ' + c;
+            });
+        }
+    });
+    
+    // Content is already HTML from item tags, do not re-render as markdown
+    var view = hexo.theme.getView('_partial/sections/items.njk');
+
+    return view.renderSync({
+        content: content,
+        class: className,
+        onscroll: onscroll
+    });
+}, { ends: true });
+
+hexo.extend.tag.register('item', function (args, content) {
+    // {% item icon:gem %} content {% enditem %}
+    var icon = '';
+    args.forEach(function (arg) {
+        if (arg.startsWith('icon:')) icon = arg.substring(5);
+    });
+
+    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
+    var view = hexo.theme.getView('_partial/sections/item.njk');
+    
+    return view.renderSync({
+        content: text,
+        icon: icon
+    });
+}, { ends: true });
+
+/**
+ * Dummy tags for compatibility
+ */
+hexo.extend.tag.register('centerquote', function (args, content) {
+    return '<blockquote class="centerquote">' + hexo.render.renderSync({ text: content, engine: 'markdown' }) + '</blockquote>';
+}, { ends: true });
+
+hexo.extend.tag.register('note', function (args, content) {
+    return '<div class="note ' + args.join(' ') + '">' + hexo.render.renderSync({ text: content, engine: 'markdown' }) + '</div>';
+}, { ends: true });
+
+hexo.extend.tag.register('tabs', function (args, content) {
+    return '<div class="tabs">' + hexo.render.renderSync({ text: content, engine: 'markdown' }) + '</div>';
+}, { ends: true });
+
+hexo.extend.tag.register('tab', function (args, content) {
+    return '<div class="tab">' + hexo.render.renderSync({ text: content, engine: 'markdown' }) + '</div>';
+}, { ends: true });
+
+hexo.extend.tag.register('label', function (args) {
+    return '<span class="label ' + args.join(' ') + '">' + args.join(' ') + '</span>';
+});
+
+hexo.extend.tag.register('includecode', function (args) {
+    return '<pre><code>' + args.join(' ') + '</code></pre>';
+});

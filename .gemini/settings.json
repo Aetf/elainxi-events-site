@@ -1,0 +1,16 @@
+{
+  "ui": {
+    "useAlternateBuffer": true
+  },
+  "ide": {
+    "enabled": true
+  },
+  "tools": {
+    "enableMessageBusIntegration": true
+  },
+  "security": {
+    "folderTrust": {
+      "enabled": true
+    }
+  }
+}

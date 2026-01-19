@@ -1,5 +1,7 @@
 var cheerio = require('cheerio');
 
+var priority = hexo.theme.config.filters && hexo.theme.config.filters.banner ? hexo.theme.config.filters.banner.priority : 10;
+
 hexo.extend.filter.register('after_post_render', function(data){
   // Only apply to front page or pages using front layout
   if (data.layout !== 'front' && data.path !== 'index.html') {
@@ -58,8 +60,6 @@ hexo.extend.filter.register('after_post_render', function(data){
       }
     });
 
-    // Cheerio.load() wraps content in html/body. We need to extract the processed content back.
-    // .html() on the body element gets the inner HTML, which corresponds to the original fragment structure.
     data.content = $('body').html();
   }
-});
+}, priority);

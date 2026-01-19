@@ -1,9 +1,16 @@
 # Menu
-menu:
+nav_menu:
   Introduction: "#intro"
   First Section: "#first"
   Second Section: "#second"
   Get Started: "#cta"
+
+# Filter Priorities
+filters:
+  banner:
+    priority: 10
+  nav:
+    priority: 20
 
 # Theme Content Configuration
 sections:

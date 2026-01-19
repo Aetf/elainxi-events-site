@@ -2,4 +2,3 @@
 gemini-cli = "latest"
 node = "latest"
 "npm:hexo-cli" = "latest"
-prettier = "latest"

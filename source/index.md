@@ -13,16 +13,6 @@ This is a **Banner** element, and it's generally used as an introduction or open
 
 {% asbanner h1 images/banner.jpg %}
 
-<!-- Navigation (Manual for now, typically config driven but good to have a simple nav helper later) -->
-<nav id="nav">
-    <ul>
-        <li><a href="#intro" class="active">Introduction</a></li>
-        <li><a href="#first">First Section</a></li>
-        <li><a href="#second">Second Section</a></li>
-        <li><a href="#cta">Get Started</a></li>
-    </ul>
-</nav>
-
 {% spotlight position:right id:first image:images/spotlight01.jpg %}
 
 ## Spotlight

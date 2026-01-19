@@ -157,3 +157,10 @@ hexo.extend.generator.register('json_feed', function(locals){
 });
 ```
 
+## 3. Verification
+
+You can use the usual `hexo generate` and `hexo serve` combo to start a server
+and use browser tools to view the generate site.
+
+Remember to stop the running `hexo serve` process after you are done, so the
+next time the command can run on the same port.

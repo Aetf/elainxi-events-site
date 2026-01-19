@@ -11,6 +11,8 @@ filters:
     priority: 10
   nav:
     priority: 20
+  spotlight:
+    priority: 30
 
 # Theme Content Configuration
 sections:

@@ -1,9 +1,9 @@
 ---
 layout: front
-title: Story
+title: Elainxi Events
 ---
 
-# Story
+# Elainxi Events
 
 {% major %}
 A (modular, highly tweakable) responsive one-page template designed by [HTML5 UP](https://html5up.net) and released for free under the [Creative Commons](https://html5up.net/license).
@@ -13,27 +13,29 @@ This is a **Banner** element, and it's generally used as an introduction or open
 
 {% asbanner h1 images/banner.jpg %}
 
-{% spotlight position:right id:first image:images/spotlight01.jpg %}
-
 ## Spotlight
 
 This is a **Spotlight** element, and it's generally used – as its name implies – to spotlight a particular feature, subject, or pretty much whatever. You can customize its [appearance with a number of modifiers](#), as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
-<ul class="actions stacked">
-    <li><a href="#" class="button">Learn More</a></li>
-</ul>
-{% endspotlight %}
+{% actions %}
 
-{% spotlight position:left id:second image:images/spotlight02.jpg %}
+- [Learn More](#)
+
+{% endactions %}
+
+{% asspotlight h2 images/spotlight01.jpg position:right id:first %}
 
 ## Spotlight
 
 This is also a **Spotlight** element, and it's here because this demo would look a bit empty with just one spotlight. Like all spotlights, you can customize its [appearance with a number of modifiers](#), as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
-<ul class="actions stacked">
-    <li><a href="#" class="button">Learn More</a></li>
-</ul>
-{% endspotlight %}
+{% actions %}
+
+- [Learn More](#)
+
+{% endactions %}
+
+{% asspotlight h2 images/spotlight02.jpg position:left id:second %}
 
 {% wrapper class:style1|align-center %}
 

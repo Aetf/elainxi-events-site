@@ -40,38 +40,81 @@ hexo.extend.tag.register('asbanner', function (args) {
 });
 
 /**
- * Spotlight Tag
- * Usage: {% spotlight class:style1|orient-right id:first image:path/to/image.jpg %} content {% endspotlight %}
+ * AsSpotlight tag
+ * Transform preceding content into a spotlight section
+ * Syntax: {% asspotlight h2 images/pic01.jpg [options] %}
  */
-/**
- * Spotlight Tag
- * Usage: {% spotlight position:left|right id:myid image:path/to/image.jpg %} content {% endspotlight %}
- */
-hexo.extend.tag.register('spotlight', function (args, content) {
-    var imageSrc = '';
-    var position = 'right'; // default
-    var id = '';
+hexo.extend.tag.register('asspotlight', function (args) {
+    var boundary = args[0]; // e.g., 'h2'
+    var image = args[1];    // e.g., 'images/pic01.jpg'
+    
+    // Parse options: key:value|key:value
+    var options = {};
+    for (var i = 2; i < args.length; i++) {
+        var parts = args[i].split(':');
+        if (parts.length === 2) {
+            options[parts[0]] = parts[1];
+        }
+    }
 
+    // Output hidden marker with data
+    return '<div class="crs-section-marker" ' + 
+           'data-type="spotlight" ' +
+           'data-boundary="' + boundary + '" ' +
+           'data-image="' + image + '" ' +
+           "data-options='" + JSON.stringify(options) + "'></div>";
+});
+
+/**
+ * Actions tag
+ * Render a list of actions (buttons)
+ * Syntax: {% actions [options] %} ... {% endactions %}
+ */
+hexo.extend.tag.register('actions', function (args, content) {
+    var options = {};
     args.forEach(function (arg) {
-        if (arg.startsWith('image:')) {
-            imageSrc = arg.substring(6);
-        } else if (arg.startsWith('position:')) {
-            position = arg.substring(9);
-        } else if (arg.startsWith('id:')) {
-            id = arg.substring(3);
+        var parts = arg.split(':');
+        if (parts.length === 2) {
+            options[parts[0]] = parts[1];
         }
     });
 
+    // Render markdown content (the list)
     var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
-    var view = hexo.theme.getView('_partial/sections/spotlight.njk');
     
-    return view.renderSync({
-        content: text,
-        image: imageSrc,
-        position: position,
-        id: id
-    });
+    // Use cheerio to transform the list
+    var cheerio = require('cheerio');
+    var $ = cheerio.load(text, { decodeEntities: false });
+    
+    var ul = $('ul');
+    if (ul.length > 0) {
+        ul.addClass('actions');
+        // Default to stacked if not specified? Or usage should specify.
+        // Let's add 'stacked' by default if no width/layout is specified for consistency with previous usage, 
+        // OR rely on user to pass `type:stacked` or similar. 
+        // Current usage in banner: <ul class="actions stacked">.
+        // Let's look at options.
+        
+        // Build button classes based on options
+        var btnClasses = ['button'];
+        if (options.type === 'primary') btnClasses.push('primary');
+        if (options.size === 'small') btnClasses.push('small');
+        if (options.size === 'large') btnClasses.push('large');
+        if (options.width === 'wide') btnClasses.push('wide');
+        if (options.width === 'fit') btnClasses.push('fit');
+        if (options.scroll_to) btnClasses.push('smooth-scroll-middle');
+        if (options.icon) btnClasses.push('icon ' + options.icon);
+        
+        // Apply classes to all links
+        $('a').addClass(btnClasses.join(' '));
+        
+        // Return the outer HTML of the ul
+        return $.html('ul');
+    }
+    
+    return text;
 }, { ends: true });
+
 
 /**
  * Gallery Tag

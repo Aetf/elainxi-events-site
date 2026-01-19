@@ -115,6 +115,44 @@ hexo.extend.tag.register('actions', function (args, content) {
     return text;
 }, { ends: true });
 
+/**
+ * AsItems tag
+ * Marks the containing section as an Items section
+ * Syntax: {% asitems [options] %}
+ */
+hexo.extend.tag.register('asitems', function(args) {
+    var options = {};
+    args.forEach(function(arg) {
+        var parts = arg.split(':');
+        if (parts.length === 2) {
+            options[parts[0]] = parts[1];
+        } else {
+             // Handle boolean flags like onscroll-fade-in
+             options[arg] = true;
+        }
+    });
+    
+    return '<div class="crs-section-marker" ' +
+           'data-type="items" ' +
+           "data-options='" + JSON.stringify(options) + "'></div>";
+});
+
+/**
+ * Item tag
+ * Sets metadata for an item
+ * Syntax: {% item icon:gem %}
+ */
+hexo.extend.tag.register('item', function(args) {
+    var icon = '';
+    args.forEach(function(arg) {
+        if (arg.startsWith('icon:')) {
+            icon = arg.substring(5);
+        }
+    });
+    
+    return '<div class="crs-item-marker" data-icon="' + icon + '"></div>';
+});
+
 
 /**
  * Gallery Tag
@@ -197,45 +235,7 @@ hexo.extend.tag.register('wrapper', function (args, content) {
 }, { ends: true });
 
 
-hexo.extend.tag.register('items', function (args, content) {
-    var className = '';
-    var onscroll = false;
-    
-    args.forEach(function (arg) {
-        if (arg.startsWith('class:')) {
-            var classes = arg.substring(6).split('|');
-            classes.forEach(function(c) {
-                if (c === 'onscroll-fade-in') onscroll = true;
-                else className += ' ' + c;
-            });
-        }
-    });
-    
-    // Content is already HTML from item tags, do not re-render as markdown
-    var view = hexo.theme.getView('_partial/sections/items.njk');
 
-    return view.renderSync({
-        content: content,
-        class: className,
-        onscroll: onscroll
-    });
-}, { ends: true });
-
-hexo.extend.tag.register('item', function (args, content) {
-    // {% item icon:gem %} content {% enditem %}
-    var icon = '';
-    args.forEach(function (arg) {
-        if (arg.startsWith('icon:')) icon = arg.substring(5);
-    });
-
-    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
-    var view = hexo.theme.getView('_partial/sections/item.njk');
-    
-    return view.renderSync({
-        content: text,
-        icon: icon
-    });
-}, { ends: true });
 
 /**
  * Dummy tags for compatibility

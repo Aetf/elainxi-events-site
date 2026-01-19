@@ -13,6 +13,8 @@ filters:
     priority: 20
   spotlight:
     priority: 30
+  items:
+    priority: 40
 
 # Theme Content Configuration
 sections:

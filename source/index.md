@@ -55,26 +55,28 @@ Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
 {% endgallery %}
 {% endwrapper %}
 
-{% wrapper class:style1|align-center id:cta %}
-
 ## Items
 
 This is an **Items** element, and it's basically just a grid for organizing items of various types.
 
-{% items class:style1|medium|onscroll-fade-in %}
-{% item icon:gem %}
+{% asitems style:one size:medium fade %}
 
 ### One
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper.
-{% enditem %}
+{% item icon:gem %}
 
-{% item icon:save %}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper.
 
 ### Two
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper.
-{% enditem %}
-{% enditems %}
+{% item icon:save %}
 
-{% endwrapper %}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper.
+
+#### This is part of two
+
+2 content
+
+## Another section that is not part of it.
+
+test

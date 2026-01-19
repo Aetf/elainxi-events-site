@@ -1,1 +1,17 @@
-<div class="items style1 medium {{ 'onscroll-fade-in' if onscroll }} {{ class }}">{{ content | safe }}</div>
+<section class="wrapper {{ style }} align-center" id="{{ id }}">
+    <div class="inner">
+        {{ header | safe }}
+        {{ intro | safe }}
+        <div class="items style1 {{ size }} {{ 'onscroll-fade-in' if fade }}">
+            {% for item in items %}
+            <section>
+                {% if item.icon %}
+                <span class="icon style2 major fa-{{ item.icon }}"></span>
+                {% endif %}
+                <{{ item.itemHeaderTag }}>{{ item.title }}</{{ item.itemHeaderTag }}>
+                {{ item.content | safe }}
+            </section>
+            {% endfor %}
+        </div>
+    </div>
+</section>

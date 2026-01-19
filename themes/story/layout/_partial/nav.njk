@@ -1,4 +1,4 @@
-<nav id="nav">
+<nav id="nav" class="{{ class }}">
     <ul>
         {% for label, url in theme.nav_menu %}
         <li><a href="{{ url }}" {% if loop.first %}class="active"{% endif %}>{{ label }}</a></li>

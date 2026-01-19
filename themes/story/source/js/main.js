@@ -128,59 +128,17 @@
 		if ($nav.length > 0) {
 
 			// Shrink effect.
-		/*
-			$('#nav + section')
-				.scrollex({
-				mode: 'top',
-				enter: function() {
-					$nav.addClass('alt');
-					$nav.addClass('fixed');
-				},
-				leave: function() {
-					$nav.removeClass('alt');
-					$nav.removeClass('fixed');
+				if (!$nav.hasClass('locked')) {
+					var navOffsetTop = $nav.offset().top;
+
+					$window.on('scroll', function() {
+						if ($window.scrollTop() > navOffsetTop) {
+							$nav.addClass('alt fixed');
+						} else {
+							$nav.removeClass('alt fixed');
+						}
+					}).trigger('scroll');
 				}
-			});
-			*/
-				var navOffsetTop = $nav.offset().top; // Get the initial distance of the nav from the top of the document
-
-				$window.on('scroll', function() {
-
-				  // We check if the window's scroll position is greater than the nav's initial position.
-				  // This is more performant than using getBoundingClientRect on every scroll tick.
-				  if ($window.scrollTop() > navOffsetTop) {
-					$nav.addClass('alt');
-					$nav.addClass('fixed');
-				  } else {
-					$nav.removeClass('alt');
-					$nav.removeClass('fixed');
-				  }
-
-				}).trigger('scroll'); // Trigger the scroll event on page load to set the initial state
-
-		/*
-				$nav.next()
-					.scrollex({
-						mode: 'top',
-						enter: function() {
-							$nav.addClass('alt');
-						},
-						leave: function() {
-							$nav.removeClass('alt');
-						},
-					});
-		*/
-
-		/*
-				const observer = new IntersectionObserver((entries, observer) => {
-				  entries.forEach(entry => {
-					$nav.toggleClass('alt', entry.boundingClientRect.top < entry.rootBounds.top - 1);
-					$nav.toggleClass('fixed', entry.boundingClientRect.top <= entry.rootBounds.top);
-					console.log("isIntersecting?", entry);
-				  });
-				}, {threshold: 0, rootMargin: '0px 0px -100% 0px'});
-				observer.observe(document.querySelector('#nav + section'));
-		*/
 			// Links.
 				var $nav_a = $nav.find('a');
 

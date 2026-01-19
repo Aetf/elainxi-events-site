@@ -31,6 +31,9 @@
 		& + section {
 			padding-top: 4.25em;
 		}
+		&.locked + section {
+			padding-top: 3em;
+		}
 
 		ul {
 			margin: 0;

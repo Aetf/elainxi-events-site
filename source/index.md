@@ -37,23 +37,10 @@ This is also a **Spotlight** element, and it's here because this demo would look
 
 {% asspotlight h2 images/spotlight02.jpg position:left id:second %}
 
-{% wrapper class:style1|align-center %}
-
 ## Gallery
 
 This is a **Gallery** element. It can behave as a lightbox (when given the `lightbox` class).
-
-{% gallery class:style2|medium lightbox:true %}
-{% gallery_item src:images/gallery/fulls/01.jpg thumb:images/gallery/thumbs/01.jpg title:Title %}
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
-{% endgallery_item %}
-
-{% gallery_item src:images/gallery/fulls/02.jpg thumb:images/gallery/thumbs/02.jpg title:Title %}
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
-{% endgallery_item %}
-
-{% endgallery %}
-{% endwrapper %}
+{% asgallery style:style2 size:medium lightbox:true %}
 
 ## Items
 

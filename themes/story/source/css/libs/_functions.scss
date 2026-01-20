@@ -27,7 +27,10 @@
 	@else {
 
 		$result: ();
-		$index: if($index < 0, list.length($list) + $index + 1, $index);
+		// Use a standard block instead of the if() function
+		@if $index < 0 {
+			$index: list.length($list) + $index + 1;
+		}
 
 		@for $i from 1 through list.length($list) {
 

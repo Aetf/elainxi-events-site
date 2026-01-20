@@ -153,86 +153,29 @@ hexo.extend.tag.register('item', function(args) {
     return '<div class="crs-item-marker" data-icon="' + icon + '"></div>';
 });
 
-
 /**
- * Gallery Tag
- * Usage: {% gallery class:style2|medium lightbox:true %} ... {% endgallery %}
+ * AsGallery tag
+ * Marks the containing section as a Gallery section
+ * Syntax: {% asgallery [options] %}
  */
-hexo.extend.tag.register('gallery', function (args, content) {
-    var className = '';
-    var lightbox = false;
-
-    args.forEach(function (arg) {
-        if (arg.startsWith('class:')) {
-            className += ' ' + arg.substring(6).replace(/\|/g, ' ');
-        } else if (arg === 'lightbox:true') {
-            lightbox = true;
-        }
-    });
-
-    // Content is already HTML from gallery_item tags, do not re-render as markdown
-    var view = hexo.theme.getView('_partial/sections/gallery.njk');
-
-    return view.renderSync({
-        content: content,
-        class: className,
-        lightbox: lightbox
-    });
-}, { ends: true });
-
-hexo.extend.tag.register('gallery_item', function (args, content) {
-    // {% gallery_item src:full.jpg thumb:thumb.jpg title:"My Title" %} Caption {% endgallery_item %}
-    var src = '';
-    var thumb = '';
-    var title = '';
-
-    args.forEach(function (arg) {
-        if (arg.startsWith('src:')) src = arg.substring(4);
-        if (arg.startsWith('thumb:')) thumb = arg.substring(6);
-        if (arg.startsWith('title:')) title = arg.substring(6).replace(/_/g, ' '); // simple hack for spaces
-    });
-
-    // If thumb is missing, use src
-    if (!thumb) thumb = src;
-    if (title.startsWith('"') && title.endsWith('"')) title = title.substring(1, title.length - 1);
-
-    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
-    var view = hexo.theme.getView('_partial/sections/gallery_item.njk');
-
-    return view.renderSync({
-        content: text,
-        src: src,
-        thumb: thumb,
-        title: title
-    });
-}, { ends: true });
-
-
-/**
- * Wrapper/Items Tag
- * Usage: {% wrapper class:style1|align-center %} ... {% endwrapper %}
- */
-hexo.extend.tag.register('wrapper', function (args, content) {
-    var className = 'wrapper';
-    var id = '';
-    
-    args.forEach(function (arg) {
-        if (arg.startsWith('class:')) {
-            className += ' ' + arg.substring(6).replace(/\|/g, ' ');
-        } else if (arg.startsWith('id:')) {
-            id = arg.substring(3);
+hexo.extend.tag.register('asgallery', function(args) {
+    var options = {};
+    args.forEach(function(arg) {
+        var parts = arg.split(':');
+        if (parts.length === 2) {
+            options[parts[0]] = parts[1];
+        } else {
+             // Handle boolean flags like lightbox
+             options[arg] = true;
         }
     });
     
-    var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
-    var view = hexo.theme.getView('_partial/sections/wrapper.njk');
+    return '<div class="crs-section-marker" ' +
+           'data-type="gallery" ' +
+           "data-options='" + JSON.stringify(options) + "'></div>";
+});
 
-    return view.renderSync({
-        content: text,
-        class: className,
-        id: id
-    });
-}, { ends: true });
+
 
 
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const { findSectionContent } = require('./section_utils');
+const { findSectionContent, cleanSectionHeader } = require('./section_utils');
 
 /**
  * Parses an Items section.
@@ -76,6 +76,9 @@ function parseItems($, $header) {
     
     const style = options.style === 'one' ? 'style1' : (options.style || 'style1');
 
+    // Clean header before capturing HTML
+    cleanSectionHeader($parentHeader);
+    
     return {
         type: 'items',
         header: $.html($parentHeader),

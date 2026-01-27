@@ -1,6 +1,6 @@
 'use strict';
 
-const { findSectionContent } = require('./section_utils');
+const { findSectionContent, cleanSectionHeader } = require('./section_utils');
 
 /**
  * Parses a Banner section.
@@ -18,6 +18,10 @@ function parseBanner($, $header) {
 
     const image = $header.attr('data-section-image');
     const options = JSON.parse($header.attr('data-section-options') || '{}');
+    
+    // Clean header before capturing HTML
+    cleanSectionHeader(header);
+    
     const contentHtml = $.html(header) + '\n' + content.map((i, el) => $.html(el)).get().join('\n');
 
     return {

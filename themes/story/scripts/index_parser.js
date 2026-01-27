@@ -70,8 +70,15 @@ hexo.extend.filter.register('after_post_render', function(data) {
             if ($contentToRemove) $contentToRemove.remove();
         }
     });
+    
+    // Phase 3: Cleanup any remaining section header markers
+    // This ensures no crs-section-header class or data-section-* attrs leak into output
+    $('.crs-section-header').each(function() {
+        cleanSectionHeader($(this));
+    });
 
     data.sections = sections;
-    data.content = $.html();
+    // Use $('body').html() to avoid extra <html><head><body> wrapper tags
+    data.content = $('body').html();
     
 }, priority);

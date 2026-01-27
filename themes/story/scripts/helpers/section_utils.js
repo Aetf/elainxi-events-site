@@ -55,7 +55,21 @@ function findSectionContent($, $header) {
     };
 }
 
+/**
+ * Cleans section header markers (class and data attrs) from a header element.
+ * Call this before capturing header HTML for section data.
+ * 
+ * @param {CheerioElement} $header - The header element to clean
+ */
+function cleanSectionHeader($header) {
+    $header.removeClass('crs-section-header');
+    $header.removeAttr('data-section-type');
+    $header.removeAttr('data-section-image');
+    $header.removeAttr('data-section-options');
+}
+
 module.exports = {
     findNearestHeader,
-    findSectionContent
+    findSectionContent,
+    cleanSectionHeader
 };

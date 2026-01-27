@@ -1,6 +1,6 @@
 'use strict';
 
-const { findSectionContent } = require('./section_utils');
+const { findSectionContent, cleanSectionHeader } = require('./section_utils');
 
 /**
  * Parses a Gallery section.
@@ -46,6 +46,9 @@ function parseGallery(hexo, $, $header) {
     options.size = options.size || 'medium';
     options.lightbox = options.lightbox !== false;
 
+    // Clean header before capturing HTML
+    cleanSectionHeader(header);
+    
     const introHtml = $.html(header) + '\n' + content.map((i, el) => $.html(el)).get().join('\n');
 
     return {

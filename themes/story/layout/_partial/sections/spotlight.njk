@@ -1,8 +1,23 @@
-<section class="spotlight style1 orient-{{ position | default('right') }} content-align-left image-position-center onscroll-image-fade-in" id="{{ id }}">
-    <div class="content">
-        {{ content | safe }}
-    </div>
-    <div class="image">
-        <img src="{{ image }}" alt="" />
-    </div>
+{% set style = "style" + (options.style if options.style else "1") %}
+{% set orient = "orient-" + (options.orient if options.orient else "right") %}
+{% set content_align = "content-align-" + (options.content_align if options.content_align else "left") %}
+{% set image_position = "image-position-" + (options.image_position if options.image_position else "center") %}
+{% set fullscreen = "fullscreen" if options.fullscreen else "" %}
+{% set halfscreen = "halfscreen" if options.halfscreen else "" %}
+{% set invert = "invert" if options.invert else "" %}
+{% set color = "color" + options.color if options.color else "" %}
+{% set onload_content = "onload-content-" + options.onload_content if options.onload_content else "" %}
+{% set onload_image = "onload-image-" + options.onload_image if options.onload_image else "" %}
+{% set onscroll_content = "onscroll-content-" + options.onscroll_content if options.onscroll_content else "" %}
+{% set onscroll_image = "onscroll-image-" + options.onscroll_image if options.onscroll_image else "onscroll-image-fade-in" %}
+{% set extra_class = options.class if options.class else "" %}
+
+<section
+  class="spotlight {{ style }} {{ orient }} {{ content_align }} {{ image_position }} {{ fullscreen }} {{ halfscreen }} {{ onload_content }} {{ onload_image }} {{ onscroll_content }} {{ onscroll_image }} {{ invert }} {{ color }} {{ extra_class }}"
+  id="{{ options.id }}"
+>
+  <div class="content">{{ content | safe }}</div>
+  <div class="image">
+    <img src="{{ image }}" alt="" />
+  </div>
 </section>

@@ -14,7 +14,8 @@ function parseContent($, elements) {
     
     return {
         type: 'content',
-        content: contentHtml
+        content: contentHtml,
+        options: {}  // Content sections don't have markers, so no options
     };
 }
 

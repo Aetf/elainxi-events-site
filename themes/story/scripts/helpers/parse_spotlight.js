@@ -28,8 +28,7 @@ function parseSpotlight($, $header) {
         type: 'spotlight',
         content: contentHtml,
         image: image,
-        id: options.id,
-        position: options.position,
+        options: options,
         $header: header,
         $content: content
     };

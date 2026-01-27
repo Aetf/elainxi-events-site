@@ -73,8 +73,6 @@ function parseItems($, $header) {
     const $introWrapper = $('<div></div>');
     introElements.forEach(el => $introWrapper.append(el.clone()));
     const introHtml = $introWrapper.html();
-    
-    const style = options.style === 'one' ? 'style1' : (options.style || 'style1');
 
     // Clean header before capturing HTML
     cleanSectionHeader($parentHeader);
@@ -84,10 +82,7 @@ function parseItems($, $header) {
         header: $.html($parentHeader),
         intro: introHtml,
         items: processedItems,
-        id: $parentHeader.attr('id') || '',
-        style: style,
-        size: options.size || 'medium',
-        fade: options.fade || options['onscroll-fade-in'],
+        options: options,
         $header: header,
         $content: content
     };

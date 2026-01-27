@@ -43,13 +43,13 @@ A normal section of text in between other special sections.
 
 ## Gallery
 
-{% asgallery style:style2 size:medium lightbox:true %}
+{% asgallery style:2 size:medium lightbox %}
 
 This is a **Gallery** element. It can behave as a lightbox (when given the `lightbox` class).
 
 ## Items
 
-{% asitems style:one size:medium fade %}
+{% asitems style:1 size:medium fade:onscroll %}
 
 This is an **Items** element, and it's basically just a grid for organizing items of various types.
 

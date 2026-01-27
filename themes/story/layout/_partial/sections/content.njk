@@ -1,3 +1,11 @@
-<section class="wrapper style1 align-center">
+{% set wrapper_style = "style" + (options.wrapper_style if options.wrapper_style else "1") %}
+{% set align = "align-" + (options.align if options.align else "center") %}
+{% set invert = "invert" if options.invert else "" %}
+{% set color = "color" + options.color if options.color else "" %}
+{% set extra_class = options.class if options.class else "" %}
+
+<section
+  class="wrapper {{ wrapper_style }} {{ align }} {{ invert }} {{ color }} {{ extra_class }}"
+>
   <div class="inner">{{ content | safe }}</div>
 </section>

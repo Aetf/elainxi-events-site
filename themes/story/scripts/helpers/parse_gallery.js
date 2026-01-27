@@ -40,11 +40,7 @@ function parseGallery(hexo, $, $header) {
         console.error('[Index Parser] Gallery Error:', e);
     }
 
-    // Defaults
-    options.gallery_style = options.style || 'style2';
-    options.wrapper_style = options.wrapper_style || 'style1';
-    options.size = options.size || 'medium';
-    options.lightbox = options.lightbox !== false;
+    // Options are passed through to template which handles defaults
 
     // Clean header before capturing HTML
     cleanSectionHeader(header);

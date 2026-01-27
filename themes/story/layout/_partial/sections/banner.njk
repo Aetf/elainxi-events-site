@@ -1,10 +1,18 @@
-{% set style = options.style if options.style else "style1" %}
-{% set orient = "orient-" + options.orient if options.orient else "orient-left" %}
-{% set content_align = "content-align-" + options.content_align if options.content_align else "content-align-left" %}
-{% set image_position = "image-position-" + options.image_position if options.image_position else "image-position-right" %}
+{% set style = "style" + (options.style if options.style else "1") %}
+{% set orient = "orient-" + (options.orient if options.orient else "left") %}
+{% set content_align = "content-align-" + (options.content_align if options.content_align else "left") %}
+{% set image_position = "image-position-" + (options.image_position if options.image_position else "right") %}
+{% set fullscreen = "fullscreen" if options.fullscreen else "" %}
+{% set invert = "invert" if options.invert else "" %}
+{% set color = "color" + options.color if options.color else "" %}
+{% set onload_content = "onload-content-" + options.onload_content if options.onload_content else "onload-content-fade-right" %}
+{% set onload_image = "onload-image-" + options.onload_image if options.onload_image else "onload-image-fade-in" %}
+{% set onscroll_content = "onscroll-content-" + options.onscroll_content if options.onscroll_content else "" %}
+{% set onscroll_image = "onscroll-image-" + options.onscroll_image if options.onscroll_image else "" %}
+{% set extra_class = options.class if options.class else "" %}
 
 <section
-  class="banner fullscreen onload-image-fade-in onload-content-fade-right {{ style }} {{ orient }} {{ content_align }} {{ image_position }}"
+  class="banner {{ style }} {{ fullscreen }} {{ orient }} {{ content_align }} {{ image_position }} {{ onload_content }} {{ onload_image }} {{ onscroll_content }} {{ onscroll_image }} {{ invert }} {{ color }} {{ extra_class }}"
 >
   <div class="content">
     {{ content | safe }}

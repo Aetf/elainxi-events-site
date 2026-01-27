@@ -1,11 +1,12 @@
 'use strict';
 
 const cheerio = require('cheerio');
-const { findNearestHeader, findSectionContent } = require('./helpers/section_utils');
+const { findNearestHeader, findSectionContent, cleanSectionHeader } = require('./helpers/section_utils');
 const { parseBanner } = require('./helpers/parse_banner');
 const { parseSpotlight } = require('./helpers/parse_spotlight');
 const { parseGallery } = require('./helpers/parse_gallery');
 const { parseItems } = require('./helpers/parse_items');
+const { parseContent } = require('./helpers/parse_content');
 
 var priority = hexo.theme.config.filters && hexo.theme.config.filters.after_post_render ? hexo.theme.config.filters.after_post_render.priority : 10;
 
@@ -38,47 +39,74 @@ hexo.extend.filter.register('after_post_render', function(data) {
         $marker.remove();
     });
     
-    // Phase 2: Iterate over section headers and parse
+    // Phase 2: Build a set of elements that belong to special sections
+    const specialSectionElements = new Set();
+    
     $('.crs-section-header').each(function() {
         const $header = $(this);
-        const type = $header.attr('data-section-type');
+        const { header, content } = findSectionContent($, $header);
         
-        let sectionData = null;
-
-        if (type === 'banner') {
-            sectionData = parseBanner($, $header);
-        } else if (type === 'spotlight') {
-            sectionData = parseSpotlight($, $header);
-        } else if (type === 'gallery') {
-            sectionData = parseGallery(hexo, $, $header);
-        } else if (type === 'items') {
-            sectionData = parseItems($, $header);
-        }
+        // Mark header element
+        specialSectionElements.add($header[0]);
         
-        if (sectionData) {
-            // Get cleanup references before deleting from sectionData
-            const $headerToRemove = sectionData.$header;
-            const $contentToRemove = sectionData.$content;
-            
-            delete sectionData.$header;
-            delete sectionData.$content;
-            
-            sections.push(sectionData);
-            
-            // Remove processed elements from DOM
-            if ($headerToRemove) $headerToRemove.remove();
-            if ($contentToRemove) $contentToRemove.remove();
+        // Mark all content elements
+        content.each(function() {
+            specialSectionElements.add(this);
+        });
+    });
+    
+    // Phase 3: Walk DOM children in document order
+    const $body = $('body');
+    const $children = $body.children();
+    let contentBuffer = [];
+    
+    $children.each(function() {
+        const el = this;
+        const $el = $(el);
+        
+        if (specialSectionElements.has(el)) {
+            // This element is part of a special section
+            if ($el.hasClass('crs-section-header')) {
+                // Flush any buffered content first
+                if (contentBuffer.length > 0) {
+                    sections.push(parseContent($, contentBuffer));
+                    contentBuffer = [];
+                }
+                
+                // Parse the special section
+                const type = $el.attr('data-section-type');
+                let sectionData = null;
+                
+                if (type === 'banner') {
+                    sectionData = parseBanner($, $el);
+                } else if (type === 'spotlight') {
+                    sectionData = parseSpotlight($, $el);
+                } else if (type === 'gallery') {
+                    sectionData = parseGallery(hexo, $, $el);
+                } else if (type === 'items') {
+                    sectionData = parseItems($, $el);
+                }
+                
+                if (sectionData) {
+                    delete sectionData.$header;
+                    delete sectionData.$content;
+                    sections.push(sectionData);
+                }
+            }
+            // If it's a content element of a special section (not the header), skip it
+            // (it's already included in the special section's content)
+        } else {
+            // Normal content - buffer it
+            contentBuffer.push($el);
         }
     });
     
-    // Phase 3: Cleanup any remaining section header markers
-    // This ensures no crs-section-header class or data-section-* attrs leak into output
-    $('.crs-section-header').each(function() {
-        cleanSectionHeader($(this));
-    });
+    // Flush any remaining buffered content
+    if (contentBuffer.length > 0) {
+        sections.push(parseContent($, contentBuffer));
+    }
 
     data.sections = sections;
-    // Use $('body').html() to avoid extra <html><head><body> wrapper tags
-    data.content = $('body').html();
+    data.content = '';
     
 }, priority);

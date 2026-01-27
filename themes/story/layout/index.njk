@@ -28,9 +28,8 @@ layout: layout
       {{ partial('_partial/sections/items', section) | safe }}
     {% elif section.type == 'gallery' %}
       {{ partial('_partial/sections/gallery', section) | safe }}
+    {% elif section.type == 'content' %}
+      {{ partial('_partial/sections/content', section) | safe }}
     {% endif %}
   {% endfor %}
 {% endif %}
-
-{# Render remaining content (footer etc) #}
-{{ page.content | safe }}

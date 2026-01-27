@@ -8,6 +8,7 @@
 >
   <div class="content">
     {{ content | safe }}
+    {% set actions = actions if actions else (theme.sections.banner.actions if theme.sections.banner else []) %}
     {% if actions %}
       <ul class="actions stacked">
         {% for action in actions %}

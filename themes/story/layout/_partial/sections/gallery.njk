@@ -1,28 +1,26 @@
-<section class="wrapper {{ options.wrapper_style }} {{ 'align-center' if options.align_center }}" id="{{ options.id }}">
-    <div class="inner">
-        {% if header %}
-        <h2>{{ header | safe }}</h2>
-        {% endif %}
-        {% if intro %}
-        {{ intro | safe }}
-        {% endif %}
-    </div>
+<section
+  class="wrapper {{ options.wrapper_style }} {{ 'align-center' if options.align_center }}"
+  id="{{ options.id }}"
+>
+  <div class="inner">{{ intro | safe }}</div>
 
-    <!-- Gallery -->
-    <div class="gallery {{ options.gallery_style }} {{ options.size }} {{ 'lightbox' if options.lightbox }} {{ 'onscroll-fade-in' if options.fade }}">
-        {% for item in items %}
-            <article>
-                <a href="{{ item.src }}" class="image">
-                    <img src="{{ item.thumb }}" alt="{{ item.title }}" />
-                </a>
-                <div class="caption">
-                    <h3>{{ item.title }}</h3>
-                    {{ item.content | safe }}
-                    <ul class="actions fixed">
-                        <li><span class="button small">Details</span></li>
-                    </ul>
-                </div>
-            </article>
-        {% endfor %}
-    </div>
+  <!-- Gallery -->
+  <div
+    class="gallery {{ options.gallery_style }} {{ options.size }} {{ 'lightbox' if options.lightbox }} {{ 'onscroll-fade-in' if options.fade }}"
+  >
+    {% for item in items %}
+      <article>
+        <a href="{{ item.src }}" class="image">
+          <img src="{{ item.thumb }}" alt="{{ item.title }}" />
+        </a>
+        <div class="caption">
+          <h3>{{ item.title }}</h3>
+          {{ item.content | safe }}
+          <ul class="actions fixed">
+            <li><span class="button small">Details</span></li>
+          </ul>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
 </section>

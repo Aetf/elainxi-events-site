@@ -159,8 +159,19 @@ hexo.extend.generator.register('json_feed', function(locals){
 
 ## 3. Verification
 
-You can use the usual `hexo generate` and `hexo serve` combo to start a server
-and use browser tools to view the generate site.
+`hexo generate` will generate the site in the `public` folder. This can be helpful for verifying the HTML output of your theme.
 
-Remember to stop the running `hexo serve` process after you are done, so the
-next time the command can run on the same port.
+`hexo server` will start a server and serve the site. This is a long running process that will block the terminal. You can stop it with `Ctrl+C`. It will also watch for changes in the `source` folder and regenerate the site.
+The started server will NOT necessarily write to the `public` folder. So the `public` folder may contain information that is not synced with what served by the server.
+
+`hexo clean` will clean the `public` folder. Sometimes the hexo server will not pick up changes, especially changes in plugins. In that case, you can run `hexo clean` and `hexo server` to restart the server.
+
+ALWAYS make sure the server is running (in the background) before you try to access the site using browser tools.
+
+## 4. Hexo command line
+
+Use what the user project uses for hexo commandline. For example, if the user project contains mise.toml, use that for hexo. Ask the user for confirmation if you are not sure.
+
+When there are issues with hexo command not found, first retry it. If it still fails, ask the user to install hexo.
+
+NEVER use `npx` on your own, unless the user explicitly asks you to.

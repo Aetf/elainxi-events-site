@@ -1,0 +1,36 @@
+---
+layout: layout
+---
+
+{% set has_banner = false %}
+{% if page.sections %}
+  {% for section in page.sections %}
+    {% if section.type == 'banner' %}
+      {% set has_banner = true %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{# If no banner, render sticky nav at top #}
+{% if not has_banner %}
+  {{ partial('_partial/nav', { class: 'alt locked' }) | safe }}
+{% endif %}
+
+{% if page.sections %}
+  {% for section in page.sections %}
+    {% if section.type == 'banner' %}
+      {{ partial('_partial/sections/banner', section) | safe }}
+      {# Render standard nav after banner #}
+      {{ partial('_partial/nav', {}) | safe }}
+    {% elif section.type == 'spotlight' %}
+      {{ partial('_partial/sections/spotlight', section) | safe }}
+    {% elif section.type == 'items' %}
+      {{ partial('_partial/sections/items', section) | safe }}
+    {% elif section.type == 'gallery' %}
+      {{ partial('_partial/sections/gallery', section) | safe }}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{# Render remaining content (footer etc) #}
+{{ page.content | safe }}

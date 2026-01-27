@@ -4,17 +4,17 @@
 
 # Site
 title: Elanxi Events
-subtitle: 'Crafting Unforgettable Moments'
+subtitle: "Crafting Unforgettable Moments"
 description: |-
   Bespoke wedding planning and coordination services. From intimate elopements to grand celebrations, we bring your dream wedding to life.
 keywords:
-- wedding planner
-- wedding services
-- event planning
-- wedding coordination
+  - wedding planner
+  - wedding services
+  - event planning
+  - wedding coordination
 author: Jiahui Ji
 language: en
-timezone: 'America/Los_Angeles'
+timezone: "America/Los_Angeles"
 
 # Themes: https://hexo.io/themes/
 theme: story
@@ -32,9 +32,6 @@ pretty_urls:
 # Directory
 source_dir: source
 public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
@@ -46,7 +43,7 @@ titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
-  exclude: ''
+  exclude: ""
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
@@ -56,27 +53,20 @@ syntax_highlighter: highlight.js
 highlight:
   line_number: true
   auto_detect: false
-  tab_replace: ''
+  tab_replace: ""
   wrap: true
   hljs: false
 prismjs:
   preprocess: true
   line_number: true
-  tab_replace: ''
+  tab_replace: ""
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: 'blog/'
-  per_page: 10
   order_by: -date
-
-# Category & Tag
-default_category: uncategorized
-category_map:
-tag_map:
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
@@ -89,7 +79,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+updated_option: "mtime"
 
 # Pagination
 ## Set per_page to 0 to disable pagination

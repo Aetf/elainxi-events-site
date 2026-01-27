@@ -9,12 +9,12 @@ favicon: /images/favicon.png
 # Main navigation menu
 # The landing page will be the root.
 menu:
-- name: Home
-  url: /
-- name: Pricing
-  url: /pricing/
-- name: Contact
-  url: /#contact # This will be an anchor link to the contact section on the home page
+  - name: Home
+    url: /
+  - name: Pricing
+    url: /pricing/
+  - name: Contact
+    url: /#contact # This will be an anchor link to the contact section on the home page
 
 social:
   rednote: https://xxx
@@ -33,4 +33,8 @@ sass:
   style: expanded
   silenceDeprecations: []
   loadPaths:
-  - node_modules
+    - node_modules
+
+filters:
+  after_post_render:
+    priority: 10

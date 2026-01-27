@@ -1,9 +1,11 @@
 ---
-layout: front
+layout: index
 title: Elainxi Events
 ---
 
 # Elainxi Events
+
+{% asbanner images/banner.jpg %}
 
 {% major %}
 A (modular, highly tweakable) responsive one-page template designed by [HTML5 UP](https://html5up.net) and released for free under the [Creative Commons](https://html5up.net/license).
@@ -11,9 +13,9 @@ A (modular, highly tweakable) responsive one-page template designed by [HTML5 UP
 
 This is a **Banner** element, and it's generally used as an introduction or opening statement. You can customize its [appearance with a number of modifiers](#), as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-banner)).
 
-{% asbanner h1 images/banner.jpg %}
-
 ## Spotlight
+
+{% asspotlight images/spotlight01.jpg position:right id:first %}
 
 This is a **Spotlight** element, and it's generally used – as its name implies – to spotlight a particular feature, subject, or pretty much whatever. You can customize its [appearance with a number of modifiers](#), as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
@@ -23,9 +25,9 @@ This is a **Spotlight** element, and it's generally used – as its name implies
 
 {% endactions %}
 
-{% asspotlight h2 images/spotlight01.jpg position:right id:first %}
-
 ## Spotlight
+
+{% asspotlight images/spotlight02.jpg position:left id:second %}
 
 This is also a **Spotlight** element, and it's here because this demo would look a bit empty with just one spotlight. Like all spotlights, you can customize its [appearance with a number of modifiers](#), as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
@@ -35,18 +37,21 @@ This is also a **Spotlight** element, and it's here because this demo would look
 
 {% endactions %}
 
-{% asspotlight h2 images/spotlight02.jpg position:left id:second %}
+## A normal section in between
+
+A normal section of text in between other special sections.
 
 ## Gallery
 
-This is a **Gallery** element. It can behave as a lightbox (when given the `lightbox` class).
 {% asgallery style:style2 size:medium lightbox:true %}
+
+This is a **Gallery** element. It can behave as a lightbox (when given the `lightbox` class).
 
 ## Items
 
-This is an **Items** element, and it's basically just a grid for organizing items of various types.
-
 {% asitems style:one size:medium fade %}
+
+This is an **Items** element, and it's basically just a grid for organizing items of various types.
 
 ### One
 

@@ -16,15 +16,14 @@ hexo.extend.tag.register('major', function (args, content) {
 /**
  * AsBanner tag
  * Transform preceding content into a banner section
- * Syntax: {% asbanner h1 images/banner.jpg [options] %}
+ * Syntax: {% asbanner images/banner.jpg [options] %}
  */
 hexo.extend.tag.register('asbanner', function (args) {
-    var boundary = args[0]; // e.g., 'h1'
-    var image = args[1];    // e.g., 'images/banner.jpg'
+    var image = args[0];    // e.g., 'images/banner.jpg'
     
     // Parse options: key:value|key:value
     var options = {};
-    for (var i = 2; i < args.length; i++) {
+    for (var i = 1; i < args.length; i++) {
         var parts = args[i].split(':');
         if (parts.length === 2) {
             options[parts[0]] = parts[1];
@@ -34,7 +33,6 @@ hexo.extend.tag.register('asbanner', function (args) {
     // Output hidden marker with data
     return '<div class="crs-section-marker" ' + 
            'data-type="banner" ' +
-           'data-boundary="' + boundary + '" ' +
            'data-image="' + image + '" ' +
            "data-options='" + JSON.stringify(options) + "'></div>";
 });
@@ -42,15 +40,14 @@ hexo.extend.tag.register('asbanner', function (args) {
 /**
  * AsSpotlight tag
  * Transform preceding content into a spotlight section
- * Syntax: {% asspotlight h2 images/pic01.jpg [options] %}
+ * Syntax: {% asspotlight images/pic01.jpg [options] %}
  */
 hexo.extend.tag.register('asspotlight', function (args) {
-    var boundary = args[0]; // e.g., 'h2'
-    var image = args[1];    // e.g., 'images/pic01.jpg'
+    var image = args[0];    // e.g., 'images/pic01.jpg'
     
     // Parse options: key:value|key:value
     var options = {};
-    for (var i = 2; i < args.length; i++) {
+    for (var i = 1; i < args.length; i++) {
         var parts = args[i].split(':');
         if (parts.length === 2) {
             options[parts[0]] = parts[1];
@@ -60,7 +57,6 @@ hexo.extend.tag.register('asspotlight', function (args) {
     // Output hidden marker with data
     return '<div class="crs-section-marker" ' + 
            'data-type="spotlight" ' +
-           'data-boundary="' + boundary + '" ' +
            'data-image="' + image + '" ' +
            "data-options='" + JSON.stringify(options) + "'></div>";
 });

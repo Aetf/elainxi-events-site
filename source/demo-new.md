@@ -13,20 +13,15 @@ A (modular, highly tweakable) responsive one-page template designed by [HTML5 UP
 
 This is a **Banner** element, and it's generally used as an introduction or opening statement. You can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-banner)).
 
-{% actions %}
-
-- [Get Started](#first){.button.large.wide.smooth-scroll-middle}
-  {% endactions %}
-
 ## Spotlight
 
 {% asspotlight images/spotlight01.jpg style:1 orient:right content_align:left image_position:center id:first onscroll_image:fade-in %}
 
 This is a **Spotlight** element, and it's generally used – as its name implies – to spotlight a particular feature, subject, or pretty much whatever. You can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
-{% actions %}
+{% actions stacked %}
 
-- [Learn More](#){.button}
+- [Learn More](#)
   {% endactions %}
 
 ## Spotlight
@@ -35,9 +30,9 @@ This is a **Spotlight** element, and it's generally used – as its name implies
 
 This is also a **Spotlight** element, and it's here because this demo would look a bit empty with just one spotlight. Like all spotlights, you can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
-{% actions %}
+{% actions stacked %}
 
-- [Learn More](#){.button}
+- [Learn More](#)
   {% endactions %}
 
 ## Spotlight
@@ -46,9 +41,9 @@ This is also a **Spotlight** element, and it's here because this demo would look
 
 And yes, this is another **Spotlight** element, and it's also here because I need to fill a bit of space. Naturally, like any other spotlight, you can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
-{% actions %}
+{% actions stacked %}
 
-- [Learn More](#){.button}
+- [Learn More](#)
   {% endactions %}
 
 ## Gallery

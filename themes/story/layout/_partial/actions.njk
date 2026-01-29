@@ -1,0 +1,16 @@
+{# Actions Partial - Renders a list of action buttons #}
+{# @param actions - Array of action objects with url, label, type, size, width, scroll_to, icon #}
+{# @param actions_stacked - Boolean, if true adds 'stacked' class #}
+{# @param actions_fixed - Boolean, if true adds 'fixed' class #}
+
+{% if actions and actions.length > 0 %}
+<ul class="actions{% if actions_stacked %} stacked{% endif %}{% if actions_fixed %} fixed{% endif %}">
+  {% for action in actions %}
+  <li>
+    <a href="{{ action.url }}" class="button{% if action.type == 'primary' %} primary{% endif %}{% if action.size and action.size != 'default' %} {{ action.size }}{% endif %}{% if action.width and action.width != 'default' %} {{ action.width }}{% endif %}{% if action.scroll_to %} smooth-scroll-middle{% endif %}{% if action.icon %} icon {{ action.icon }}{% endif %}">
+      {{ action.label }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}

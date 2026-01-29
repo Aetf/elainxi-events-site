@@ -2,6 +2,26 @@
 'use strict';
 
 /**
+ * Parse options from tag args
+ * Handles both key:value pairs and boolean flags
+ * @param {Array} args - Arguments array from tag (positional args should be shifted before calling)
+ * @returns {Object} Parsed options object
+ */
+function parseOptions(args) {
+    var options = {};
+    args.forEach(function(arg) {
+        var parts = arg.split(':');
+        if (parts.length === 2) {
+            options[parts[0]] = parts[1];
+        } else if (parts.length === 1 && parts[0]) {
+            // Boolean flag (e.g., fullscreen, invert, stacked)
+            options[parts[0]] = true;
+        }
+    });
+    return options;
+}
+
+/**
  * Major tag
  * Used for major text in intro
  * Syntax: {% major %} text {% endmajor %}
@@ -19,18 +39,9 @@ hexo.extend.tag.register('major', function (args, content) {
  * Syntax: {% asbanner images/banner.jpg [options] %}
  */
 hexo.extend.tag.register('asbanner', function (args) {
-    var image = args[0];    // e.g., 'images/banner.jpg'
-    
-    // Parse options: key:value|key:value
-    var options = {};
-    for (var i = 1; i < args.length; i++) {
-        var parts = args[i].split(':');
-        if (parts.length === 2) {
-            options[parts[0]] = parts[1];
-        }
-    }
+    var image = args.shift();
+    var options = parseOptions(args);
 
-    // Output hidden marker with data
     return '<div class="crs-section-marker" ' + 
            'data-type="banner" ' +
            'data-image="' + image + '" ' +
@@ -43,18 +54,9 @@ hexo.extend.tag.register('asbanner', function (args) {
  * Syntax: {% asspotlight images/pic01.jpg [options] %}
  */
 hexo.extend.tag.register('asspotlight', function (args) {
-    var image = args[0];    // e.g., 'images/pic01.jpg'
-    
-    // Parse options: key:value|key:value
-    var options = {};
-    for (var i = 1; i < args.length; i++) {
-        var parts = args[i].split(':');
-        if (parts.length === 2) {
-            options[parts[0]] = parts[1];
-        }
-    }
+    var image = args.shift();
+    var options = parseOptions(args);
 
-    // Output hidden marker with data
     return '<div class="crs-section-marker" ' + 
            'data-type="spotlight" ' +
            'data-image="' + image + '" ' +
@@ -67,13 +69,7 @@ hexo.extend.tag.register('asspotlight', function (args) {
  * Syntax: {% actions [options] %} ... {% endactions %}
  */
 hexo.extend.tag.register('actions', function (args, content) {
-    var options = {};
-    args.forEach(function (arg) {
-        var parts = arg.split(':');
-        if (parts.length === 2) {
-            options[parts[0]] = parts[1];
-        }
-    });
+    var options = parseOptions(args);
 
     // Render markdown content (the list)
     var text = hexo.render.renderSync({ text: content, engine: 'markdown' });
@@ -85,11 +81,11 @@ hexo.extend.tag.register('actions', function (args, content) {
     var ul = $('ul');
     if (ul.length > 0) {
         ul.addClass('actions');
-        // Default to stacked if not specified? Or usage should specify.
-        // Let's add 'stacked' by default if no width/layout is specified for consistency with previous usage, 
-        // OR rely on user to pass `type:stacked` or similar. 
-        // Current usage in banner: <ul class="actions stacked">.
-        // Let's look at options.
+        
+        // Add stacked class if specified
+        if (options.stacked) {
+            ul.addClass('stacked');
+        }
         
         // Build button classes based on options
         var btnClasses = ['button'];
@@ -117,16 +113,7 @@ hexo.extend.tag.register('actions', function (args, content) {
  * Syntax: {% asitems [options] %}
  */
 hexo.extend.tag.register('asitems', function(args) {
-    var options = {};
-    args.forEach(function(arg) {
-        var parts = arg.split(':');
-        if (parts.length === 2) {
-            options[parts[0]] = parts[1];
-        } else {
-             // Handle boolean flags like onscroll-fade-in
-             options[arg] = true;
-        }
-    });
+    var options = parseOptions(args);
     
     return '<div class="crs-section-marker" ' +
            'data-type="items" ' +
@@ -139,15 +126,9 @@ hexo.extend.tag.register('asitems', function(args) {
  * Syntax: {% item icon:gem %} or {% item icon:save icon_style:solid %}
  */
 hexo.extend.tag.register('item', function(args) {
-    var icon = '';
-    var iconStyle = '';  // Can be 'solid', 'brands', etc.
-    args.forEach(function(arg) {
-        if (arg.startsWith('icon:')) {
-            icon = arg.substring(5);
-        } else if (arg.startsWith('icon_style:')) {
-            iconStyle = arg.substring(11);
-        }
-    });
+    var options = parseOptions(args);
+    var icon = options.icon || '';
+    var iconStyle = options.icon_style || '';
     
     return '<div class="crs-item-marker" data-icon="' + icon + '" data-icon-style="' + iconStyle + '"></div>';
 });
@@ -158,26 +139,12 @@ hexo.extend.tag.register('item', function(args) {
  * Syntax: {% asgallery [options] %}
  */
 hexo.extend.tag.register('asgallery', function(args) {
-    var options = {};
-    args.forEach(function(arg) {
-        var parts = arg.split(':');
-        if (parts.length === 2) {
-            options[parts[0]] = parts[1];
-        } else {
-             // Handle boolean flags like lightbox
-             options[arg] = true;
-        }
-    });
+    var options = parseOptions(args);
     
     return '<div class="crs-section-marker" ' +
            'data-type="gallery" ' +
            "data-options='" + JSON.stringify(options) + "'></div>";
 });
-
-
-
-
-
 
 /**
  * Dummy tags for compatibility
@@ -205,3 +172,4 @@ hexo.extend.tag.register('label', function (args) {
 hexo.extend.tag.register('includecode', function (args) {
     return '<pre><code>' + args.join(' ') + '</code></pre>';
 });
+

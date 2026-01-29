@@ -17,20 +17,7 @@
   <div class="content">
     {{ content | safe }}
     {% set actions = actions if actions else (theme.sections.banner.actions if theme.sections.banner else []) %}
-    {% if actions %}
-      <ul class="actions stacked">
-        {% for action in actions %}
-          <li>
-            <a
-              href="{{ action.url }}"
-              class="button {{ 'primary' if action.type == 'primary' }} {{ action.size if action.size and action.size != 'default' }} {{ action.width if action.width and action.width != 'default' }} {{ 'smooth-scroll-middle' if action.scroll_to }} {{ 'icon ' + action.icon if action.icon }}"
-            >
-              {{ action.label }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+    {{ partial('_partial/actions', { actions: actions, actions_stacked: true }) | safe }}
   </div>
   {% if image %}
     <div class="image">

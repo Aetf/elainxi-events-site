@@ -168,6 +168,14 @@ The started server will NOT necessarily write to the `public` folder. So the `pu
 
 ALWAYS make sure the server is running (in the background) before you try to access the site using browser tools.
 
+When do validation, always follow this step:
+
+1. use hexo generate to verify that there are no syntax errors (check the command output and exit code) to make sure the pages can be successfully generated
+2. make sure there are no other hexo server running (You can use this command `pkill -f "hexo" 2>/dev/null; sleep 1; pgrep -f "hexo" && echo "Still running" || echo "All hexo processes stopped"` to check)
+3. start a new hexo server in background
+4. use browser tool to do whatever validation as necessary
+5. clean up. You MUST always clean up, and ensure that there are no running background processes that you started during the process. You can use this command `pgrep -f "hexo" && pkill -f "hexo" && echo "Killed hexo processes" || echo "No hexo running"`.
+
 ## 4. Hexo command line
 
 Use what the user project uses for hexo commandline. For example, if the user project contains mise.toml, use that for hexo. Ask the user for confirmation if you are not sure.

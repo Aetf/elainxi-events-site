@@ -1,0 +1,25 @@
+{% set footer = theme.footer %}
+{% if footer %}
+  <!-- Footer -->
+  <footer class="wrapper style1 align-center">
+    <div class="inner">
+      {% if footer.social %}
+        <ul class="icons">
+          {% for item in footer.social %}
+            <li>
+              <a
+                href="{{ item.url }}"
+                class="icon {{ item.style if item.style else 'brands' }} style2 fa-{{ item.icon }}"
+              >
+                <span class="label">{{ item.label }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if footer.copyright %}
+        <p>{{ footer.copyright | safe }}</p>
+      {% endif %}
+    </div>
+  </footer>
+{% endif %}

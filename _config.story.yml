@@ -20,7 +20,24 @@ social:
   rednote: https://xxx
 
 footer:
-  copyright: "Elainxi Events"
+  copyright: '&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.'
+  social:
+    - icon: twitter
+      label: Twitter
+      url: "#"
+    - icon: facebook-f
+      label: Facebook
+      url: "#"
+    - icon: instagram
+      label: Instagram
+      url: "#"
+    - icon: linkedin
+      label: LinkedIn
+      url: "#"
+    - icon: envelope
+      label: Email
+      url: "#"
+      style: "" # Not brands, regular
 
 attribution:
   enable: true

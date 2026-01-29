@@ -14,7 +14,7 @@
             {% for item in items %}
             <section>
                 {% if item.icon %}
-                <span class="icon style2 major fa-{{ item.icon }}"></span>
+                <span class="icon {{ item.iconStyle }} style2 major fa-{{ item.icon }}"></span>
                 {% endif %}
                 <{{ item.itemHeaderTag }}>{{ item.title }}</{{ item.itemHeaderTag }}>
                 {{ item.content | safe }}

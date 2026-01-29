@@ -57,8 +57,10 @@ function parseItems($, $header) {
         
         const $itemMarker = $wrapper.find('.crs-item-marker');
         let icon = '';
+        let iconStyle = '';
         if ($itemMarker.length > 0) {
             icon = $itemMarker.attr('data-icon');
+            iconStyle = $itemMarker.attr('data-icon-style') || '';
             $itemMarker.remove();
         }
         
@@ -66,6 +68,7 @@ function parseItems($, $header) {
             title: item.title,
             content: $wrapper.html(),
             icon: icon,
+            iconStyle: iconStyle,
             itemHeaderTag: itemHeaderTag
         };
     });

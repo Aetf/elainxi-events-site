@@ -1,22 +1,17 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
-<head>
-    <title>
-        {{ config.title }}
-    </title>
+  <head>
+    <title>{{ config.title }}</title>
     {{ partial('_partial/head') | safe }}
-</head>
+  </head>
 
-<body class="is-preload">
-
+  <body class="is-preload">
     <!-- Wrapper -->
     <div id="wrapper" class="divided">
-        {{ body | safe }}
+      {{ body | safe }}
+      {{ partial('_partial/footer') | safe }}
     </div>
 
     {{ partial('_partial/scripts') | safe }}
-
-</body>
-
+  </body>
 </html>

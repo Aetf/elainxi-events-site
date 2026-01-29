@@ -136,17 +136,20 @@ hexo.extend.tag.register('asitems', function(args) {
 /**
  * Item tag
  * Sets metadata for an item
- * Syntax: {% item icon:gem %}
+ * Syntax: {% item icon:gem %} or {% item icon:save icon_style:solid %}
  */
 hexo.extend.tag.register('item', function(args) {
     var icon = '';
+    var iconStyle = '';  // Can be 'solid', 'brands', etc.
     args.forEach(function(arg) {
         if (arg.startsWith('icon:')) {
             icon = arg.substring(5);
+        } else if (arg.startsWith('icon_style:')) {
+            iconStyle = arg.substring(11);
         }
     });
     
-    return '<div class="crs-item-marker" data-icon="' + icon + '"></div>';
+    return '<div class="crs-item-marker" data-icon="' + icon + '" data-icon-style="' + iconStyle + '"></div>';
 });
 
 /**

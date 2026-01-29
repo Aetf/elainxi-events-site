@@ -1,25 +1,24 @@
-{% set wrapper_style = "style" + (options.wrapper_style if options.wrapper_style else "1") %}
-{% set items_style = "style" + (options.style if options.style else "1") %}
-{% set size = options.size if options.size else "medium" %}
-{% set invert = "invert" if options.invert else "" %}
-{% set color = "color" + options.color if options.color else "" %}
-{% set fade = "onscroll-fade-in" if options.fade == "onscroll" else ("onload-fade-in" if options.fade == "onload" else "") %}
-{% set extra_class = options.class if options.class else "" %}
-
+{%- set wrapper_style = "style" + (options.wrapper_style if options.wrapper_style else "1") -%}
+{%- set items_style = "style" + (options.style if options.style else "1") -%}
+{%- set size = options.size if options.size else "medium" -%}
+{%- set invert = "invert" if options.invert else "" -%}
+{%- set color = "color" + options.color if options.color else "" -%}
+{%- set fade = "onscroll-fade-in" if options.fade == "onscroll" else ("onload-fade-in" if options.fade == "onload" else "") -%}
+{%- set extra_class = options.class if options.class else "" -%}
 <section class="wrapper {{ wrapper_style }} align-center {{ invert }} {{ color }} {{ extra_class }}" id="{{ options.id }}">
-    <div class="inner">
-        {{ header | safe }}
-        {{ intro | safe }}
-        <div class="items {{ items_style }} {{ size }} {{ fade }}">
-            {% for item in items %}
-            <section>
-                {% if item.icon %}
-                <span class="icon {{ item.iconStyle }} style2 major fa-{{ item.icon }}"></span>
-                {% endif %}
-                <{{ item.itemHeaderTag }}>{{ item.title }}</{{ item.itemHeaderTag }}>
-                {{ item.content | safe }}
-            </section>
-            {% endfor %}
-        </div>
+  <div class="inner">
+{{ header | safe -}}
+{{ intro | safe }}
+    <div class="items {{ items_style }} {{ size }} {{ fade }}">
+{%- for item in items %}
+      <section>
+{%- if item.icon %}
+        <span class="icon {{ item.iconStyle }} style2 major fa-{{ item.icon }}"></span>
+{%- endif %}
+        <{{ item.itemHeaderTag }}>{{ item.title }}</{{ item.itemHeaderTag }}>
+{{ item.content | safe }}
+      </section>
+{%- endfor %}
     </div>
+  </div>
 </section>

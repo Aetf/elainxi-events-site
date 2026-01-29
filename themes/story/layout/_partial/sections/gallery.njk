@@ -1,22 +1,20 @@
-{% set wrapper_style = "style" + (options.wrapper_style if options.wrapper_style else "1") %}
-{% set gallery_style = "style" + (options.style if options.style else "2") %}
-{% set size = options.size if options.size else "medium" %}
-{% set invert = "invert" if options.invert else "" %}
-{% set color = "color" + options.color if options.color else "" %}
-{% set fade = "onscroll-fade-in" if options.fade == "onscroll" else ("onload-fade-in" if options.fade == "onload" else "") %}
-{% set extra_class = options.class if options.class else "" %}
-
+{%- set wrapper_style = "style" + (options.wrapper_style if options.wrapper_style else "1") -%}
+{%- set gallery_style = "style" + (options.style if options.style else "2") -%}
+{%- set size = options.size if options.size else "medium" -%}
+{%- set invert = "invert" if options.invert else "" -%}
+{%- set color = "color" + options.color if options.color else "" -%}
+{%- set fade = "onscroll-fade-in" if options.fade == "onscroll" else ("onload-fade-in" if options.fade == "onload" else "") -%}
+{%- set extra_class = options.class if options.class else "" -%}
 <section
   class="wrapper {{ wrapper_style }} align-center {{ invert }} {{ color }} {{ extra_class }}"
   id="{{ options.id }}"
 >
   <div class="inner">{{ intro | safe }}</div>
-
   <!-- Gallery -->
   <div
     class="gallery {{ gallery_style }} {{ size }} {{ 'lightbox' if options.lightbox }} {{ fade }}"
   >
-    {% for item in items %}
+    {%- for item in items %}
       <article>
         <a href="{{ item.src }}" class="image">
           <img src="{{ item.thumb }}" alt="{{ item.title }}" />
@@ -29,6 +27,6 @@
           </ul>
         </div>
       </article>
-    {% endfor %}
+    {%- endfor %}
   </div>
 </section>

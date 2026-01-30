@@ -7,6 +7,7 @@
 
 /* List */
 
+	/* Scoped List Styling */
 	ol {
 		list-style: decimal;
 		margin: 0 0 var_size(element-margin) 0;
@@ -39,6 +40,16 @@
 					padding-top: 0;
 				}
 			}
+		}
+	}
+
+	/* Scoped List Styling for Content */
+	.inner, .content {
+		ol, ul {
+			margin: 0 auto var_size(element-margin) auto;
+			text-align: left;
+			display: table; // Shrink to fit content
+			max-width: 100%;
 		}
 	}
 

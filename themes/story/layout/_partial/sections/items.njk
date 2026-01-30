@@ -5,7 +5,7 @@
 {%- set color = "color" + options.color if options.color else "" -%}
 {%- set fade = "onscroll-fade-in" if options.fade == "onscroll" else ("onload-fade-in" if options.fade == "onload" else "") -%}
 {%- set extra_class = options.class if options.class else "" -%}
-<section class="wrapper {{ wrapper_style }} align-center {{ invert }} {{ color }} {{ extra_class }}" id="{{ options.id }}">
+<section class="wrapper {{ wrapper_style }} align-center {{ invert }} {{ color }} {{ extra_class }}" id="{{ id if id else options.id }}">
   <div class="inner">
 {{ header | safe -}}
 {{ intro | safe }}

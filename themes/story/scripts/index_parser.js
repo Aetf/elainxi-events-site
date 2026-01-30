@@ -107,6 +107,27 @@ hexo.extend.filter.register('after_post_render', function(data) {
     }
 
     data.sections = sections;
+    data.targets = {};
+
+    // Logic to dynamically link the Banner's "Get Started" button to the next section
+    // This avoids overwriting the next section's ID with "first", and instead points the button to the correct ID.
+    let bannerIndex = -1;
+
+    // Find banner and the next content section
+    for (let i = 0; i < data.sections.length; i++) {
+        if (data.sections[i].type === 'banner') {
+            bannerIndex = i;
+            break;
+        }
+    }
+    if (bannerIndex !== -1 && bannerIndex + 1 < data.sections.length) {
+        let nextSection = data.sections[bannerIndex + 1];
+        if (!nextSection.id) {
+            nextSection.id = 'start';
+        }
+        data.targets['next'] = `#${nextSection.id}`;
+    }
+
     data.content = '';
     
 }, priority);

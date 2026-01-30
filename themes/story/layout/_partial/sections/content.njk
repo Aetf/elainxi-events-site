@@ -4,6 +4,7 @@
 {%- set color = "color" + options.color if options.color else "" -%}
 {%- set extra_class = options.class if options.class else "" -%}
 <section
+  {% if id %}id="{{ id }}"{% endif %}
   class="wrapper {{ wrapper_style }} {{ align }} {{ invert }} {{ color }} {{ extra_class }}"
 >
   <div class="inner">{{ content | safe }}</div>

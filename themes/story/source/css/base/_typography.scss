@@ -116,8 +116,11 @@
 	blockquote {
 		border-left: solid (var_size(border-width) * 4);
 		font-style: italic;
-		margin: 0 0 var_size(element-margin) 0;
+		margin: 0 auto var_size(element-margin) auto;
 		padding: (var_size(element-margin) * 0.25) 0 (var_size(element-margin) * 0.25) var_size(element-margin);
+		max-width: 100%;
+		width: var_size(inner) * 0.75; // Use 75% of inner width
+		text-align: left; // Align text left inside the centered block
 	}
 
 	code {
@@ -133,12 +136,41 @@
 		font-family: var_font(family-fixed);
 		font-size: 0.9em;
 		margin: 0 0 var_size(element-margin) 0;
+		text-align: left; // Force codeblocks to be left aligned
 
 		code {
 			display: block;
 			line-height: 1.5;
 			padding: 0.75rem 1rem;
 			overflow-x: auto;
+		}
+	}
+
+	figure.highlight {
+		margin: 0 0 (var_size(element-margin) * 0.5) 0;
+		overflow-x: auto;
+		
+		table {
+			display: table;
+			margin: 0;
+			width: 100%;
+		}
+
+		.gutter {
+			border-right: solid 1px var_palette(border);
+			padding-right: 0.5rem;
+			text-align: right;
+			vertical-align: top;
+			width: 1%;
+		}
+
+		.code {
+			padding-left: 0.5rem;
+			vertical-align: top;
+		}
+
+		pre {
+			margin: 0;
 		}
 	}
 

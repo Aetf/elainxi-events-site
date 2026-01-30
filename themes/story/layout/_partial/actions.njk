@@ -2,12 +2,30 @@
 {#- @param actions - Array of action objects with url, label, type, size, width, scroll_to, icon -#}
 {#- @param actions_stacked - Boolean, if true adds 'stacked' class -#}
 {#- @param actions_fixed - Boolean, if true adds 'fixed' class -#}
+
+{%- set stacked = 'stacked' if actions_stacked else '' -%}
+{%- set fixed = 'fixed' if actions_fixed else '' -%}
+
 {%- if actions and actions.length > 0 %}
-<ul class="actions{% if actions_stacked %} stacked{% endif %}{% if actions_fixed %} fixed{% endif %}">
-{%- for action in actions %}
-  <li>
-    <a href="{{ action.url }}" class="button{% if action.type == 'primary' %} primary{% endif %}{% if action.size and action.size != 'default' %} {{ action.size }}{% endif %}{% if action.width and action.width != 'default' %} {{ action.width }}{% endif %}{% if action.scroll_to %} smooth-scroll-middle{% endif %}{% if action.icon %} icon {{ action.icon }}{% endif %}">{{ action.label }}</a>
-  </li>
-{%- endfor %}
-</ul>
+  <ul class="actions {{ stacked }} {{ fixed }}">
+    {%- for action in actions %}
+      <li>
+        {%- set url = action.url -%}
+
+        {% if action.target and page.targets[action.target] %}
+          {%- set url = page.targets[action.target] -%}
+        {% endif %}
+        {%- set primary = 'primary' if action.type == 'primary' else '' -%}
+        {%- set size = action.size if action.size and action.size != 'default' else '' -%}
+        {%- set width = action.width if action.width and action.width != 'default' else '' -%}
+        {%- set scroll_to = action.scroll_to if action.scroll_to else '' -%}
+        {%- set icon = 'icon ' + action.icon if action.icon else '' -%}
+        <a
+          href="{{ url }}"
+          class="button {{ primary }} {{ size }} {{ width }} {{ scroll_to }} {{ icon }}"
+          >{{ action.label }}</a
+        >
+      </li>
+    {%- endfor %}
+  </ul>
 {%- endif -%}

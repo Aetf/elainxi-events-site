@@ -13,7 +13,7 @@
 {%- set extra_class = options.class if options.class else "" -%}
 <section
   class="spotlight {{ style }} {{ orient }} {{ content_align }} {{ image_position }} {{ fullscreen }} {{ halfscreen }} {{ onload_content }} {{ onload_image }} {{ onscroll_content }} {{ onscroll_image }} {{ invert }} {{ color }} {{ extra_class }}"
-  id="{{ options.id }}"
+  id="{{ id if id else options.id }}"
 >
   <div class="content">{{ content | safe }}</div>
   <div class="image">

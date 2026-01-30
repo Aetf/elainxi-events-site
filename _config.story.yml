@@ -44,14 +44,3 @@ attribution:
   text: "Design: STORY by"
   url: "https://html5up.net"
   name: "HTML5 UP"
-
-# Plugin settings
-sass:
-  style: expanded
-  silenceDeprecations: []
-  loadPaths:
-    - node_modules
-
-filters:
-  after_post_render:
-    priority: 10

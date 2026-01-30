@@ -7,23 +7,23 @@ nav_menu:
 
 # Filter Priorities
 filters:
-  banner:
+  after_post_render:
     priority: 10
-  nav:
-    priority: 20
-  spotlight:
-    priority: 30
-  items:
-    priority: 40
-  gallery:
-    priority: 50
+
+# Plugin settings
+sass:
+  style: expanded
+  silenceDeprecations: []
+  loadPaths:
+    - node_modules
 
 # Theme Content Configuration
 sections:
   banner:
     actions:
       - label: Get Started
-        url: "#first"
+        # url: "#first"
+        target: next
         # Semantic options
         type: default # default, primary
         size: large # default, large, small

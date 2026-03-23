@@ -1,0 +1,28 @@
+name: DNS Push
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dns/dnsconfig.js'
+      - 'dns/creds.json'
+
+permissions:
+  contents: read
+
+jobs:
+  push-dns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: DNSControl push
+        uses: StackExchange/dnscontrol-action@v2
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        with:
+          cmdargs: push
+          dnsconfig_file: dns/dnsconfig.js
+          creds_file: dns/creds.json
+          post_summary: true
+          check: true

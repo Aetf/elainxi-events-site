@@ -1,0 +1,57 @@
+name: DNS Change Gate
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dns-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if DNS files changed
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            dns:
+              - 'dns/dnsconfig.js'
+              - 'dns/creds.json'
+
+      - name: Checkout (only if DNS changed)
+        if: steps.changes.outputs.dns == 'true'
+        uses: actions/checkout@v4
+
+      - name: DNSControl preview
+        if: steps.changes.outputs.dns == 'true'
+        uses: StackExchange/dnscontrol-action@v2
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        with:
+          cmdargs: preview
+          dnsconfig_file: dns/dnsconfig.js
+          creds_file: dns/creds.json
+          post_pr_comment: true
+          post_summary: true
+          check: true
+
+      - name: Require approved-dns label
+        if: steps.changes.outputs.dns == 'true'
+        run: |
+          echo "DNS files were modified — checking for 'approved-dns' label..."
+          LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
+          if echo "$LABELS" | jq -e 'index("approved-dns")' > /dev/null 2>&1; then
+            echo "✅ 'approved-dns' label found. Gate passed."
+          else
+            echo "❌ 'approved-dns' label is MISSING."
+            echo "Add the label after reviewing the DNS preview above."
+            exit 1
+          fi
+
+      - name: No DNS changes
+        if: steps.changes.outputs.dns != 'true'
+        run: echo "✅ No DNS files modified. Gate auto-passed."

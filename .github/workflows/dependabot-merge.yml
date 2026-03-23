@@ -31,7 +31,7 @@ jobs:
           install_args: "node npm:hexo-cli"
 
       - name: Install Playwright Browsers
-        run: mise exec -- npm exec playwright install --with-deps chromium
+        run: mise exec -- npm exec -- playwright install --with-deps chromium
 
       # -------------------------------------------------------------
       # 1. GENERATE GOLDEN SCREENSHOTS FROM MAIN
@@ -46,14 +46,14 @@ jobs:
 
       - name: Start Main Server
         working-directory: main-repo
-        run: mise exec -- npm exec http-server public -p 4000 &
+        run: mise exec -- npm exec http-server -- public -p 4000 &
         
       - name: Wait for Main Server
         run: mise exec -- npm exec wait-on http://127.0.0.1:4000
 
       - name: Generate Baseline Snapshots
         working-directory: main-repo
-        run: mise exec -- npm exec playwright test --update-snapshots
+        run: mise exec -- npm exec -- playwright test --update-snapshots
 
       - name: Stop Main Server
         run: kill $(lsof -t -i:4000)
@@ -76,17 +76,39 @@ jobs:
 
       - name: Start PR Server
         working-directory: pr-repo
-        run: mise exec -- npm exec http-server public -p 4000 &
+        run: mise exec -- npm exec http-server -- public -p 4000 &
         
       - name: Wait for PR Server
         run: mise exec -- npm exec wait-on http://127.0.0.1:4000
 
       - name: Run Visual Regression Test
         working-directory: pr-repo
-        run: mise exec -- npm exec playwright test
+        run: mise exec -- npm exec -- playwright test
 
       # -------------------------------------------------------------
-      # 3. AUTO-MERGE IF TESTS PASS
+      # 3. FAILURE HANDLING: UPLOAD DIFFS & COMMENT
+      # -------------------------------------------------------------
+      - name: Upload Playwright Report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-visual-diffs
+          path: |
+            pr-repo/playwright-report/
+            pr-repo/test-results/
+          retention-days: 7
+
+      - name: Comment PR on Failure
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment "${{ github.event.pull_request.html_url }}" --body "❌ **Visual Regression Failed!** The dependency bump meaningfully altered the website's HTML/CSS. 
+          
+          Please check the [Actions Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) and download the \`playwright-visual-diffs\` artifact to see the exact pixel diff screenshots."
+
+      # -------------------------------------------------------------
+      # 4. AUTO-MERGE IF TESTS PASS
       # -------------------------------------------------------------
       - name: Approve and Auto-Merge
         if: success()

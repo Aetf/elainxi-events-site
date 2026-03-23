@@ -37,5 +37,7 @@ DNS records are managed as code via [DNSControl](https://dnscontrol.org/) with C
 | Workflow | Trigger | Purpose |
 |---|---|---|
 | `deploy.yml` | Push to `main` | Build Hexo site + deploy to GitHub Pages |
+| `pr-check.yml` | Pull Request | "Sanity Check" ensuring Hexo gracefully compiles without syntax errors |
+| `dependabot-merge.yml`| Dependabot PR | Runs Playwright to compare `main` against PR for pixel-perfect dynamic visual regression. Auto-merges on success; uploads visual diffs and comments on failure |
 | `dns-gate.yml` | PR to `main` | DNSControl preview + label-blocker approval gate |
 | `dns-push.yml` | Push to `main` (DNS paths only) | Apply DNS changes via `dnscontrol push` |

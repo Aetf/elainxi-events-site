@@ -73,3 +73,15 @@ All notable operations and modifications performed by the agent on the `elainxi-
 - Updated `docs/manual-setup.md` to reflect the new domain, multi-zone Cloudflare token, and an updated redirect rule on the `.com` zone.
 - Replaced `elainxi.com` references with `elainxi.events` in `docs/architecture.md` and `docs/configuration.md`.
 
+## [2026-03-22] - Strict CI Validation and Dependabot Auto-Merge
+
+### Added
+- Created `.github/workflows/pr-check.yml` to run a strict "Sanity Check" (Hexo generation) on all PRs to support content creators utilizing GitHub's auto-merge.
+- Created `.github/workflows/dependabot-merge.yml` to specifically handle Dependabot PRs using a Zero-Baseline Dynamic Diff.
+- Added `@playwright/test`, `http-server`, and `wait-on` to `package.json` devDependencies.
+- Created `playwright.config.js` and `tests/visual.spec.js` to execute automated UI screenshots and pixel matching.
+
+### Changed
+- Updated `docs/architecture.md` to document the new `pr-check.yml` and `dependabot-merge.yml` workflows.
+- Configured `.gitignore` to ignore Playwright `test-results/` and `playwright-report/` artifacts.
+

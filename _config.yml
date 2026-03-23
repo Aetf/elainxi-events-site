@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Elanxi Events
+title: Elainxi Events
 subtitle: "Crafting Unforgettable Moments"
 description: |-
   Bespoke wedding planning and coordination services. From intimate elopements to grand celebrations, we bring your dream wedding to life.
@@ -18,11 +18,10 @@ timezone: "America/Los_Angeles"
 
 # Themes: https://hexo.io/themes/
 theme: story
-theme_config:
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://elainxi.events
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

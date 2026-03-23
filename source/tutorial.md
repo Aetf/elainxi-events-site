@@ -227,7 +227,7 @@ This includes standard Markdown formatting:
 
 - Lists
 - **Bold** and _Italic_ text
-- [Links](https://example.com)
+- [Links](https://elainxi.events)
 - Code blocks
 
 > Blockquotes allow you to highlight important text.

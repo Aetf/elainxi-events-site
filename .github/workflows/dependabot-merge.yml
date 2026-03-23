@@ -1,0 +1,97 @@
+name: Dependabot Auto-Merge
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  visual-diff:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr-repo
+
+      - name: Checkout Main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main-repo
+
+      - name: Setup Tools (Main)
+        uses: jdx/mise-action@v4
+        with:
+          install_args: "node npm:hexo-cli"
+
+      - name: Install Playwright Browsers
+        run: mise exec -- npm exec playwright install --with-deps chromium
+
+      # -------------------------------------------------------------
+      # 1. GENERATE GOLDEN SCREENSHOTS FROM MAIN
+      # -------------------------------------------------------------
+      - name: Install Main Dependencies
+        working-directory: main-repo
+        run: npm ci
+
+      - name: Build Main Site
+        working-directory: main-repo
+        run: mise exec -- hexo generate
+
+      - name: Start Main Server
+        working-directory: main-repo
+        run: mise exec -- npm exec http-server public -p 4000 &
+        
+      - name: Wait for Main Server
+        run: mise exec -- npm exec wait-on http://127.0.0.1:4000
+
+      - name: Generate Baseline Snapshots
+        working-directory: main-repo
+        run: mise exec -- npm exec playwright test --update-snapshots
+
+      - name: Stop Main Server
+        run: kill $(lsof -t -i:4000)
+
+      # -------------------------------------------------------------
+      # 2. TEST PR AGAINST GOLDENS
+      # -------------------------------------------------------------
+      - name: Transfer Snapshots to PR Repo
+        run: |
+          mkdir -p pr-repo/tests/
+          cp -r main-repo/tests/*snapshots* pr-repo/tests/ || true
+
+      - name: Install PR Dependencies
+        working-directory: pr-repo
+        run: npm ci
+
+      - name: Build PR Site
+        working-directory: pr-repo
+        run: mise exec -- hexo generate
+
+      - name: Start PR Server
+        working-directory: pr-repo
+        run: mise exec -- npm exec http-server public -p 4000 &
+        
+      - name: Wait for PR Server
+        run: mise exec -- npm exec wait-on http://127.0.0.1:4000
+
+      - name: Run Visual Regression Test
+        working-directory: pr-repo
+        run: mise exec -- npm exec playwright test
+
+      # -------------------------------------------------------------
+      # 3. AUTO-MERGE IF TESTS PASS
+      # -------------------------------------------------------------
+      - name: Approve and Auto-Merge
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review --approve "${{ github.event.pull_request.html_url }}" || true
+          gh pr merge --auto --merge "${{ github.event.pull_request.html_url }}"

@@ -23,7 +23,10 @@
     "hexo-theme-landscape": "^1.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "http-server": "^14.1.1",
     "prettier": "^3.8.0",
-    "prettier-plugin-jinja-template": "^2.1.0"
+    "prettier-plugin-jinja-template": "^2.1.0",
+    "wait-on": "^9.0.4"
   }
 }

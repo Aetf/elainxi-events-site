@@ -6,3 +6,8 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache

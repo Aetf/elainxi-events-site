@@ -24,7 +24,7 @@ jobs:
 
       - name: Checkout (only if DNS changed)
         if: steps.changes.outputs.dns == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: DNSControl preview
         if: steps.changes.outputs.dns == 'true'

@@ -2,7 +2,6 @@ name: PR Sanity Check
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

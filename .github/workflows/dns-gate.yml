@@ -28,7 +28,7 @@ jobs:
 
       - name: DNSControl preview
         if: steps.changes.outputs.dns == 'true'
-        uses: StackExchange/dnscontrol-action@v2
+        uses: koenrh/dnscontrol-action@v3
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:

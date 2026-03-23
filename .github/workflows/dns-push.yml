@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: DNSControl push
-        uses: koenrh/dnscontrol-action@v3
+        uses: StackExchange/dnscontrol-action@6c99137eebf667295447b7fd2ec443e51b53a48e
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:

@@ -84,4 +84,5 @@ All notable operations and modifications performed by the agent on the `elainxi-
 ### Changed
 - Updated `docs/architecture.md` to document the new `pr-check.yml` and `dependabot-merge.yml` workflows.
 - Configured `.gitignore` to ignore Playwright `test-results/` and `playwright-report/` artifacts.
+- Created `docs/mistakes.md` to catalog AI agent errors and updated standard operating instructions in `AGENTS.md` to enforce reviewing this log prior to taking action.
 

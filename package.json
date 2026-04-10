@@ -27,6 +27,6 @@
     "http-server": "^14.1.1",
     "prettier": "^3.8.1",
     "prettier-plugin-jinja-template": "^2.1.0",
-    "wait-on": "^9.0.4"
+    "wait-on": "^9.0.5"
   }
 }

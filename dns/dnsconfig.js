@@ -56,20 +56,20 @@ function GoogleWorkspace(dmarc_email, dkim_key) {
 D("elainxi.events", REG_NONE, DnsProvider(DSP_CF),
     GoogleWorkspace('b5d8494a6656405490be54a0661adcd4@dmarc-reports.cloudflare.net', [
         'v=DKIM1;k=rsa;p=',
-        'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj8mFkBnW4U9DGJlYvjsm',
-        'CAUH6EjdmtwcyJKt6UY910kTsSLt8QdfAqoQWi3qLd523WoB8zHjO0NdH0WrB65o',
-        '/7d0ZwbMQWMDo4YYu4IyoAcd5MKDVpHBeqfbhEmZra9ZZBo2n9cveSJzXjXQ7IZK',
-        'SXZ0AkohNXWumXIm8zvnZ0XzupLKACytFJns6GvQnSsQ9ca808HxRpMgklED49cM',
-        'YVdiZfnrkkAXh5tx2U/wbzlJ6lc8WxEC12yXEe/BR9AcNOvC4FQNSbRUXEe0vQg6',
-        'jQTCFeSUEgd24EO0adGT9RE9rA2u3qHWprH4ooqVYNBgKrFH0Y31cLKxaZpvkSDJ',
-        'EQIDAQAB'
+        'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3slNaJ8BRUda8li91TQe',
+        'Dq1lSdEmHSeqOMPyp/mfIjUZ3OynrtRa+HxnHIglXpVPnyUCP+hLJwdloe6c1e8r',
+        'PJsVQGaGqO6Nr4Cm5kW7JSjAuy0UsLJrfLvCS1PU5C2XM8iMyAvK1lPX7cpb6cDg',
+        '8u2lrrgwv1fsW5iKiUVT8pR9DZ8CZnKwOUbm6Fh94w5FNMK+F7X5WcWicIj126ZT',
+        'XP8b5b270bpJiU5GLwGXe9kGpFdjtuEB2VqJzVE8+9ytePi2R/Xors5kAUCoCL9Z',
+        'QMRtMnpLE1l3NZzu0RvlaHYy6CbxesILHiDc/VkfyY9re5H4bWVjFfnJ7WUDxUgr',
+        '8QIDAQAB'
     ]),
     GitHubPages("@"),
     CNAME("www", "elainxi.events.", CF_PROXY_ON),
     TXT('@', 'google-site-verification=JlIbTjFfxJkjrPQQyWryffWN4exb4mCSHLkH-1QGlrY', TTL(3600))
 );
 
-// Alias Domain (Redirects handled via Cloudflare Redirect Rules)
+// Secondary Domain
 D("elainxi.com", REG_NONE, DnsProvider(DSP_CF),
     GoogleWorkspace('8bfcb299a41745cea1725280cac19533@dmarc-reports.cloudflare.net', [
         'v=DKIM1;k=rsa;p=',

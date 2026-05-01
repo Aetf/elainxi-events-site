@@ -15,7 +15,7 @@
     "@fortawesome/fontawesome-free": "^7.2.0",
     "cheerio": "^1.2.0",
     "hexo": "^8.1.0",
-    "hexo-renderer-dartsass": "^1.1.0",
+    "hexo-renderer-dartsass": "^1.2.0",
     "hexo-renderer-marked": "^7.0.0",
     "hexo-renderer-nunjucks": "^2.0.0",
     "hexo-renderer-stylus": "^3.0.1",

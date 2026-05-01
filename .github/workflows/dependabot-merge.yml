@@ -30,15 +30,16 @@ jobs:
         with:
           install_args: "node npm:hexo-cli"
 
-      - name: Install Playwright Browsers
-        run: mise exec -- npm exec -- playwright install --with-deps chromium
-
       # -------------------------------------------------------------
       # 1. GENERATE GOLDEN SCREENSHOTS FROM MAIN
       # -------------------------------------------------------------
       - name: Install Main Dependencies
         working-directory: main-repo
         run: npm ci
+
+      - name: Install Playwright Browsers
+        working-directory: main-repo
+        run: mise exec -- npm exec -- playwright install --with-deps chromium
 
       - name: Build Main Site
         working-directory: main-repo
@@ -47,8 +48,9 @@ jobs:
       - name: Start Main Server
         working-directory: main-repo
         run: mise exec -- npm exec http-server -- public -p 4000 &
-        
+
       - name: Wait for Main Server
+        working-directory: main-repo
         run: mise exec -- npm exec wait-on http://127.0.0.1:4000
 
       - name: Generate Baseline Snapshots
@@ -70,6 +72,10 @@ jobs:
         working-directory: pr-repo
         run: npm ci
 
+      - name: Install Playwright Browsers
+        working-directory: pr-repo
+        run: mise exec -- npm exec -- playwright install --with-deps chromium
+
       - name: Build PR Site
         working-directory: pr-repo
         run: mise exec -- hexo generate
@@ -79,6 +85,7 @@ jobs:
         run: mise exec -- npm exec http-server -- public -p 4000 &
         
       - name: Wait for PR Server
+        working-directory: pr-repo
         run: mise exec -- npm exec wait-on http://127.0.0.1:4000
 
       - name: Run Visual Regression Test

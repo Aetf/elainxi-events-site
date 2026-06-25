@@ -102,10 +102,15 @@
 
 			.nav-wrapper {
 				padding: 0 0.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
 			}
 
 			.logo {
 				height: 1.6rem;
+				flex-shrink: 0;
+				margin-right: 0.5rem;
 
 				img {
 					max-height: 1.6rem;
@@ -113,8 +118,20 @@
 			}
 
 			ul {
+				display: flex;
+				overflow-x: auto;
+				white-space: nowrap;
+				-webkit-overflow-scrolling: touch;
+				margin: 0;
+				padding: 0;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
+
 				li {
 					margin: 0 0.1em;
+					flex-shrink: 0;
 
 					a {
 						font-size: 0.75em;

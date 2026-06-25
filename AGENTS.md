@@ -68,3 +68,12 @@ The agent is strictly required to maintain comprehensive system documentation to
 2. **Keep Documentation Synchronized:** Whenever the agent makes changes to the website's structure, configuration, layout, or core components, the corresponding markdown files in the `docs/` folder MUST be updated immediately to reflect the new state.
 3. **Continuous Changelog:** A `docs/changelog.md` document must be maintained continuously. For **every operation or modification** the agent performs on the project, an entry must be appended to the changelog. This entry must detail what was done, why it was done, and outline any relevant technical considerations or constraints.
 4. **Mistakes Log:** The agent MUST review `docs/mistakes.md` before performing actions or formulating strategies to avoid repeating past errors. When the agent makes a mistake or encounters a failure, they MUST immediately document it in `docs/mistakes.md` alongside its solution and lesson learned.
+
+---
+
+## Commit Guidelines
+
+The agent is strictly required to:
+1. **Commit Small:** Break down changes into small, logical, and self-contained units, committing them incrementally instead of in a single large commit.
+2. **Conventional Commits:** Follow the Conventional Commit message format (e.g., `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `test:`).
+

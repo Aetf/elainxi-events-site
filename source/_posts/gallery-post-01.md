@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:01
-cover: /images/gallery/thumbs/01.jpg
-
+title: "SF Airport Marriott Waterfront, CA"
+date: 2026-06-08 12:00:00
+cover: /images/gallery/gallery01.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+A beautiful waterfront celebration with breathtaking views and modern elegance.

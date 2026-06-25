@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:02
-cover: /images/gallery/thumbs/02.jpg
-
+title: "Fox Island Chapel, WA"
+date: 2026-06-07 12:00:00
+cover: /images/gallery/gallery02.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+An intimate and classic ceremony held at the historic chapel on Fox Island.

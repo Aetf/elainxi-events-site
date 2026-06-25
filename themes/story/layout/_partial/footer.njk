@@ -9,7 +9,9 @@
             <li>
               <a
                 href="{{ item.url }}"
-                class="icon {{ item.style if item.style else 'brands' }} style2 fa-{{ item.icon }}"
+                class="icon {{ item.style if item.style else 'brands' }} style2 fa-{{ item.icon }} {{ item.class if item.class else '' }}"
+                {% if item.wechat %}data-wechat="{{ item.wechat }}"{% endif %}
+                {% if item.email %}data-email="{{ item.email }}"{% endif %}
               >
                 <span class="label">{{ item.label }}</span>
               </a>

@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:07
-cover: /images/gallery/thumbs/07.jpg
-
+title: "Lutheran Church, WA"
+date: 2026-06-02 12:00:00
+cover: /images/gallery/gallery07.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+A timeless and traditional church ceremony filled with warmth and love.

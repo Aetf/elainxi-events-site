@@ -1,9 +1,5 @@
 # Menu
-nav_menu:
-  Introduction: "#intro"
-  First Section: "#first"
-  Second Section: "#second"
-  Get Started: "#cta"
+nav_menu: {}
 
 # Filter Priorities
 filters:

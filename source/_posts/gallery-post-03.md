@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:03
-cover: /images/gallery/thumbs/03.jpg
-
+title: "MacArthur Place, CA"
+date: 2026-06-06 12:00:00
+cover: /images/gallery/gallery03.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+A romantic garden wedding surrounded by lush greenery and historical charm.

@@ -142,35 +142,25 @@
 			// Links.
 				var $nav_a = $nav.find('a');
 
+				function getAnchorTarget(href) {
+					if (!href) return null;
+					if (href.charAt(0) == '#') return href;
+					if (href.indexOf('/#') === 0) return href.substring(1);
+					return null;
+				}
+
 				$nav_a
-					.scrolly({
-						speed: 1000,
-						offset: function() { return $nav.height(); }
-					})
-					.on('click', function() {
-
-						var $this = $(this);
-
-						// External link? Bail.
-							if ($this.attr('href').charAt(0) != '#')
-								return;
-
-						// Deactivate all links.
-							$nav_a
-								.removeClass('active')
-								.removeClass('active-locked');
-
-						// Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
-							$this
-								.addClass('active')
-								.addClass('active-locked');
-
-					})
 					.each(function() {
 
 						var	$this = $(this),
-							id = $this.attr('href'),
-							$section = $(id);
+							href = $this.attr('href'),
+							anchor = getAnchorTarget(href);
+
+						// No anchor target? Bail.
+							if (!anchor)
+								return;
+
+						var $section = $(anchor);
 
 						// No section for this link? Bail.
 							if ($section.length < 1)
@@ -206,6 +196,47 @@
 								}
 							});
 
+					})
+					.on('click', function(event) {
+
+						var $this = $(this),
+							href = $this.attr('href'),
+							anchor = getAnchorTarget(href);
+
+						// No anchor target? (e.g. external link or just '/'). Let browser handle.
+							if (!anchor)
+								return;
+
+						// Check if we are on the homepage
+						var isHomepage = (window.location.pathname === '/' || window.location.pathname === '/index.html' || window.location.pathname.endsWith('/'));
+
+						if (isHomepage) {
+							event.preventDefault();
+
+							var $target = $(anchor);
+
+							if ($target.length > 0) {
+								// Deactivate all links.
+									$nav_a
+										.removeClass('active')
+										.removeClass('active-locked');
+
+								// Activate link *and* lock it.
+									$this
+										.addClass('active')
+										.addClass('active-locked');
+
+								// Smooth scroll.
+									$('html, body').animate({
+										scrollTop: $target.offset().top - $nav.height()
+									}, 1000);
+
+								// Update hash in address bar without reload
+									if (history.pushState) {
+										history.pushState(null, null, anchor);
+									}
+							}
+						}
 					});
 
 		}
@@ -424,5 +455,149 @@
 							}, 275);
 
 						});
+
+		// WeChat Link Copy-to-Clipboard.
+			$('.wechat-link').on('click', function(event) {
+				event.preventDefault();
+				var $this = $(this);
+				var wechatId = $this.data('wechat');
+				
+				if (wechatId) {
+					if (navigator.clipboard && navigator.clipboard.writeText) {
+						navigator.clipboard.writeText(wechatId).then(function() {
+							showWechatToast(wechatId);
+						}, function() {
+							fallbackCopy(wechatId);
+						});
+					} else {
+						fallbackCopy(wechatId);
+					}
+				}
+			});
+
+		// Email Link Copy-to-Clipboard.
+			$('.email-link').on('click', function(event) {
+				event.preventDefault();
+				var $this = $(this);
+				var email = $this.data('email');
+				
+				if (email) {
+					if (navigator.clipboard && navigator.clipboard.writeText) {
+						navigator.clipboard.writeText(email).then(function() {
+							showEmailToast(email);
+						}, function() {
+							fallbackCopyEmail(email);
+						});
+					} else {
+						fallbackCopyEmail(email);
+					}
+				}
+			});
+
+			function fallbackCopyEmail(text) {
+				var $temp = $('<input>');
+				$('body').append($temp);
+				$temp.val(text).select();
+				try {
+					document.execCommand('copy');
+					showEmailToast(text);
+				} catch (err) {
+					alert('邮箱: ' + text);
+				}
+				$temp.remove();
+			}
+
+			function showEmailToast(text) {
+				var $toast = $('<div class="email-toast">邮箱已复制: <strong>' + text + '</strong></div>');
+				$toast.css({
+					'position': 'fixed',
+					'bottom': '2rem',
+					'left': '50%',
+					'transform': 'translateX(-50%) translateY(1rem)',
+					'background': 'rgba(40, 40, 40, 0.95)',
+					'color': '#fff',
+					'padding': '0.75rem 1.5rem',
+					'border-radius': '2rem',
+					'box-shadow': '0 10px 30px rgba(0,0,0,0.25)',
+					'z-index': 100000,
+					'opacity': 0,
+					'transition': 'all 0.3s ease',
+					'font-size': '0.9rem',
+					'pointer-events': 'none',
+					'letter-spacing': '0.5px'
+				});
+				$('body').append($toast);
+				
+				// Force reflow
+				$toast.get(0).offsetHeight;
+				
+				$toast.css({
+					'opacity': 1,
+					'transform': 'translateX(-50%) translateY(0)'
+				});
+				
+				setTimeout(function() {
+					$toast.css({
+						'opacity': 0,
+						'transform': 'translateX(-50%) translateY(-1rem)'
+					});
+					setTimeout(function() {
+						$toast.remove();
+					}, 300);
+				}, 2500);
+			}
+
+			function fallbackCopy(text) {
+				var $temp = $('<input>');
+				$('body').append($temp);
+				$temp.val(text).select();
+				try {
+					document.execCommand('copy');
+					showWechatToast(text);
+				} catch (err) {
+					alert('微信 ID: ' + text);
+				}
+				$temp.remove();
+			}
+
+			function showWechatToast(text) {
+				var $toast = $('<div class="wechat-toast">微信 ID 已复制: <strong>' + text + '</strong></div>');
+				$toast.css({
+					'position': 'fixed',
+					'bottom': '2rem',
+					'left': '50%',
+					'transform': 'translateX(-50%) translateY(1rem)',
+					'background': 'rgba(40, 40, 40, 0.95)',
+					'color': '#fff',
+					'padding': '0.75rem 1.5rem',
+					'border-radius': '2rem',
+					'box-shadow': '0 10px 30px rgba(0,0,0,0.25)',
+					'z-index': 100000,
+					'opacity': 0,
+					'transition': 'all 0.3s ease',
+					'font-size': '0.9rem',
+					'pointer-events': 'none',
+					'letter-spacing': '0.5px'
+				});
+				$('body').append($toast);
+				
+				// Force reflow
+				$toast.get(0).offsetHeight;
+				
+				$toast.css({
+					'opacity': 1,
+					'transform': 'translateX(-50%) translateY(0)'
+				});
+				
+				setTimeout(function() {
+					$toast.css({
+						'opacity': 0,
+						'transform': 'translateX(-50%) translateY(-1rem)'
+					});
+					setTimeout(function() {
+						$toast.remove();
+					}, 300);
+				}, 2500);
+			}
 
 })(jQuery);

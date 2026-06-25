@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:04
-cover: /images/gallery/thumbs/04.jpg
-
+title: "Sanborn County Park, CA"
+date: 2026-06-05 12:00:00
+cover: /images/gallery/gallery04.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+A serene outdoor celebration nestled among the redwoods.

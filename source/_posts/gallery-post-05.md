@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:05
-cover: /images/gallery/thumbs/05.jpg
-
+title: "Los Altos History Museum, CA"
+date: 2026-06-04 12:00:00
+cover: /images/gallery/gallery05.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+A historic venue featuring outdoor gardens and rustic elegance.

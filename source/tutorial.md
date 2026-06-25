@@ -5,7 +5,7 @@ title: Theme Tutorial
 
 # Theme Tutorial
 
-{% asbanner images/banner.jpg style:1 orient:left content_align:left image_position:right fullscreen onload_image:fade-in onload_content:fade-right %}
+{% asbanner /images/banner.jpg style:1 orient:left content_align:left image_position:right fullscreen onload_image:fade-in onload_content:fade-right %}
 
 {% major %}
 Welcome to the Story Theme Tutorial.
@@ -93,13 +93,13 @@ Your content here...
 
 ## Feature 1
 
-{% asspotlight images/spotlight01.jpg style:1 orient:right %}
+{% asspotlight /images/spotlight01.jpg style:1 orient:right %}
 
 This is the first spotlight. Note `orient:right` puts the image on the right.
 
 ## Feature 2
 
-{% asspotlight images/spotlight02.jpg style:1 orient:left %}
+{% asspotlight /images/spotlight02.jpg style:1 orient:left %}
 
 This is the second spotlight with `orient:left`. The theme handles the alternating layout automatically if you use `style:1`.
 

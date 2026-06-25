@@ -35,3 +35,42 @@
 // @import 'fontawesome-all.min.css';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i');
 
+// Custom: Logo & Nav Layout
+#nav {
+	.nav-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		max-width: var_size(inner);
+		margin: 0 auto;
+		padding: 0 1.5rem;
+		width: 100%;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		height: 2.2rem;
+		border: 0;
+		margin-right: auto;
+
+		img {
+			height: 100%;
+			width: auto;
+			max-height: 2.2rem;
+			display: block;
+		}
+	}
+
+	ul {
+		display: flex;
+		align-items: center;
+		margin-bottom: 0;
+		
+		li {
+			margin: 0 0.35em;
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+}

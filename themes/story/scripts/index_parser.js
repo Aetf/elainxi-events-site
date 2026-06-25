@@ -122,10 +122,12 @@ hexo.extend.filter.register('after_post_render', function(data) {
     }
     if (bannerIndex !== -1 && bannerIndex + 1 < data.sections.length) {
         let nextSection = data.sections[bannerIndex + 1];
-        if (!nextSection.id) {
+        let nextId = nextSection.id || (nextSection.options && nextSection.options.id);
+        if (!nextId) {
             nextSection.id = 'start';
+            nextId = 'start';
         }
-        data.targets['next'] = `#${nextSection.id}`;
+        data.targets['next'] = `#${nextId}`;
     }
 
     data.content = '';

@@ -27,6 +27,7 @@
 		border-top-right-radius: var_size(border-radius);
 		cursor: default;
 		text-align: center;
+		z-index: var_misc(z-index-base);
 
 		& + section {
 			padding-top: 4.25em;
@@ -97,10 +98,31 @@
 		}
 
 		@include breakpoint('<=small') {
-			display: none;
+			padding: 0.5em 0.5em;
 
-			& + #main {
-				padding-top: 0;
+			.nav-wrapper {
+				padding: 0 0.5rem;
+			}
+
+			.logo {
+				height: 1.6rem;
+
+				img {
+					max-height: 1.6rem;
+				}
+			}
+
+			ul {
+				li {
+					margin: 0 0.1em;
+
+					a {
+						font-size: 0.75em;
+						padding: 0 0.6em;
+						height: 2em;
+						line-height: 2em;
+					}
+				}
 			}
 		}
 	}

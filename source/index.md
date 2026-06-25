@@ -43,7 +43,7 @@ We strive to connect with your vision so intimately that we bring your dream wed
 
 ## Modular Planning Services
 
-{% asitems style:1 size:small %}
+{% asitems style:1 size:small id:services %}
 
 Our planning services are designed modularly to provide exact support where you need it most. **All planning modules can be fully customized to align with your unique wedding vision and specific scale.**
 

@@ -16,7 +16,7 @@ Our professional yet creative approach ensures a seamless, unforgettable experie
 
 ## Our Philosophy: The "LingXi" Connection
 
-{% asspotlight /images/spotlight01.jpg orient:right id:philosophy %}
+{% asspotlight /images/spotlight01.jpg orient:right id:philosophy class:image-position-top %}
 
 In Chinese culture, 灵犀 (LingXi) represents a deep, intuitive connection between two minds—a profound resonance where words are barely needed (心有灵犀). This concept is the very heart of Elainxi Events.
 
@@ -144,7 +144,7 @@ Our planning services are designed modularly to provide exact support where you 
 
 ## Client Experiences
 
-{% asspotlight /images/spotlight02.jpg orient:left id:testimonials %}
+{% asspotlight /images/spotlight02.jpg orient:left id:testimonials class:image-position-top %}
 
 Here is what our lovely couples have to say about working with Elaine.
 

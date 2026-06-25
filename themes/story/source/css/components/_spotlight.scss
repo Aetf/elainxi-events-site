@@ -309,12 +309,12 @@
 
 				.image {
 					width: 100%;
-					height: 45vh;
+					height: auto;
 
 					img {
 						position: relative;
 						width: 100%;
-						height: 100%;
+						height: auto;
 					}
 				}
 			}
@@ -1015,3 +1015,10 @@
 	}
 
 	@include color-spotlight;
+
+/* Utility Classes */
+	.spotlight.image-position-top {
+		.image img {
+			@include vendor('object-position', 'center 15%');
+		}
+	}

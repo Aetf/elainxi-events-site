@@ -13,9 +13,9 @@ logo: /images/logo/yuanse_wanzheng_transparent.png
 # The landing page will be the root.
 nav_menu:
   Home: /
-  Philosophy: /philosophy/
-  Services: /services/
-  Testimonials: /testimonials/
+  Philosophy: /#philosophy
+  Services: /#services
+  Testimonials: /#testimonials
 
 social:
   rednote: https://xxx

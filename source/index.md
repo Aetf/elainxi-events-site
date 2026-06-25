@@ -158,7 +158,7 @@ Here is what our lovely couples have to say about working with Elaine.
 > "She is super nice, incredibly versatile, and responsible. Through our many communications beforehand, she helped us think of so many details we hadn't even considered."
 > — **Moon**
 
-> "婚礼前她是我的'最强大脑'……彩排时她是'超级细节控'……婚礼当天她是我的'定海神针'。到了Big Day，有留在，我真的超级安心！一个靠谱的Coordinator真的能让你安心做最美的新娘！"
+> "婚礼前她是我的'最强大脑'……彩排时她是'超级细节控'……婚礼当天她是我的'定海神针'。到了Big Day，有Elaine在，我真的超级安心！一个靠谱的Coordinator真的能让你安心做最美的新娘！"
 > 
 > "Before the wedding, she was my 'mastermind'... during the rehearsal, she was super detail-oriented... and on the wedding day, she was my rock. On the Big Day, having her there made me feel incredibly secure! A reliable Coordinator truly allows you to relax and be the most beautiful bride!"
 > — **Echo**

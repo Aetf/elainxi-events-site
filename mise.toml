@@ -1,4 +1,6 @@
 [tools]
 gemini-cli = "latest"
 node = "latest"
+gh = "latest"
 "npm:hexo-cli" = "latest"
+

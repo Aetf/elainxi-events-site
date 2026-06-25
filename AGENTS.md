@@ -77,3 +77,11 @@ The agent is strictly required to:
 1. **Commit Small:** Break down changes into small, logical, and self-contained units, committing them incrementally instead of in a single large commit.
 2. **Conventional Commits:** Follow the Conventional Commit message format (e.g., `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `test:`).
 
+---
+
+## Pull Request Guidelines
+
+The agent is strictly required to:
+1. **Use GitHub CLI:** Always use the `gh` CLI (via `mise exec -- gh pr create`) to create pull requests automatically rather than asking the user to do so manually.
+
+

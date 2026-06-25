@@ -5,7 +5,7 @@ title: Story by HTML5 UP
 
 # Story
 
-{% asbanner images/banner.jpg style:1 orient:left content_align:left image_position:right fullscreen onload_image:fade-in onload_content:fade-right %}
+{% asbanner /images/banner.jpg style:1 orient:left content_align:left image_position:right fullscreen onload_image:fade-in onload_content:fade-right %}
 
 {% major %}
 A (modular, highly tweakable) responsive one-page template designed by [HTML5 UP](https://html5up.net) and released for free under the [Creative Commons](https://html5up.net/license).
@@ -15,7 +15,7 @@ This is a **Banner** element, and it's generally used as an introduction or open
 
 ## Spotlight
 
-{% asspotlight images/spotlight01.jpg style:1 orient:right content_align:left image_position:center id:first onscroll_image:fade-in %}
+{% asspotlight /images/spotlight01.jpg style:1 orient:right content_align:left image_position:center id:first onscroll_image:fade-in %}
 
 This is a **Spotlight** element, and it's generally used – as its name implies – to spotlight a particular feature, subject, or pretty much whatever. You can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
@@ -26,7 +26,7 @@ This is a **Spotlight** element, and it's generally used – as its name implies
 
 ## Spotlight
 
-{% asspotlight images/spotlight02.jpg style:1 orient:left content_align:left image_position:center onscroll_image:fade-in %}
+{% asspotlight /images/spotlight02.jpg style:1 orient:left content_align:left image_position:center onscroll_image:fade-in %}
 
 This is also a **Spotlight** element, and it's here because this demo would look a bit empty with just one spotlight. Like all spotlights, you can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 
@@ -37,7 +37,7 @@ This is also a **Spotlight** element, and it's here because this demo would look
 
 ## Spotlight
 
-{% asspotlight images/spotlight03.jpg style:1 orient:right content_align:left image_position:center onscroll_image:fade-in %}
+{% asspotlight /images/spotlight03.jpg style:1 orient:right content_align:left image_position:center onscroll_image:fade-in %}
 
 And yes, this is another **Spotlight** element, and it's also here because I need to fill a bit of space. Naturally, like any other spotlight, you can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional `onload` or `onscroll` transition modifier ([details](#reference-spotlight)).
 

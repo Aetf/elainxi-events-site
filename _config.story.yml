@@ -6,38 +6,40 @@
 # Website favicon
 favicon: /images/favicon.png
 
+# Website logo (Designer Delivered Original Colored Logo)
+logo: /images/logo/yuanse_wanzheng_transparent.png
+
 # Main navigation menu
 # The landing page will be the root.
-menu:
-  - name: Home
-    url: /
-  - name: Pricing
-    url: /pricing/
-  - name: Contact
-    url: /#contact # This will be an anchor link to the contact section on the home page
+nav_menu:
+  Home: /
+  Philosophy: /philosophy/
+  Services: /services/
+  Testimonials: /testimonials/
 
 social:
   rednote: https://xxx
 
 footer:
-  copyright: '&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.'
+  copyright: '&copy; 2026 Lingxi Weddings and Events Limited'
   social:
-    - icon: twitter
-      label: Twitter
-      url: "#"
-    - icon: facebook-f
-      label: Facebook
-      url: "#"
-    - icon: instagram
-      label: Instagram
-      url: "#"
-    - icon: linkedin
-      label: LinkedIn
-      url: "#"
     - icon: envelope
       label: Email
-      url: "#"
-      style: "" # Not brands, regular
+      url: "#email"
+      class: email-link
+      email: contact@elainxi.events
+      style: solid
+    - icon: instagram
+      label: Instagram
+      url: https://www.instagram.com/elainxievents/
+    - icon: xiaohongshu
+      label: "小红书 (ID: elainxievents)"
+      url: "https://www.rednote.com/user/profile/67437bc8000000001d02e19a?xsec_token=ABLyBKq3EYacgRGCFTaM1gOCq6osJYt9WhkETzRLsPF1g%3D&xsec_source=pc_search"
+    - icon: weixin
+      label: "微信 (ID: elainxievents)"
+      url: "#wechat"
+      class: wechat-link
+      wechat: elainxievents
 
 attribution:
   enable: true

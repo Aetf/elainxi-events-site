@@ -1,11 +1,18 @@
 <nav id="nav" class="{{ class }}">
-  <ul>
-    {%- for label, url in theme.nav_menu %}
-      <li>
-        <a href="{{ url }}" {% if loop.first %}class="active"{% endif %}
-          >{{ label }}</a
-        >
-      </li>
-    {%- endfor %}
-  </ul>
+  <div class="nav-wrapper">
+    {%- if theme.logo %}
+      <a href="/" class="logo">
+        <img src="{{ url_for(theme.logo) }}" alt="{{ config.title }}" />
+      </a>
+    {%- endif %}
+    <ul>
+      {%- for label, url in theme.nav_menu %}
+        <li>
+          <a href="{{ url }}" {% if loop.first %}class="active"{% endif %}
+            >{{ label }}</a
+          >
+        </li>
+      {%- endfor %}
+    </ul>
+  </div>
 </nav>

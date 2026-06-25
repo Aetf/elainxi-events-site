@@ -14,9 +14,15 @@
 		li {
 			display: inline-block;
 			padding: 0 0.75rem 0 0;
+			vertical-align: middle;
 
 			&:last-child {
 				padding-right: 0;
+			}
+
+			a.icon {
+				display: inline-block;
+				vertical-align: middle;
 			}
 		}
 	}

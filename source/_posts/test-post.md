@@ -2,6 +2,7 @@
 title: "Test Post with Cover"
 date: 2026-01-18 12:00:00
 cover: /images/banner.jpg
+hidden: true
 ---
 
 # Introduction

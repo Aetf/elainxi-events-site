@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:08
-cover: /images/gallery/thumbs/08.jpg
-
+title: "Lord Hill Farms, WA"
+date: 2026-06-01 12:00:00
+cover: /images/gallery/gallery08.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+A scenic countryside wedding with panoramic views of the Snohomish River Valley.

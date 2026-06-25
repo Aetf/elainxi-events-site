@@ -1,8 +1,7 @@
 ---
-title: "Title"
-date: 1970-01-01 00:00:06
-cover: /images/gallery/thumbs/06.jpg
-
+title: "Seattle Forest Vibe"
+date: 2026-06-03 12:00:00
+cover: /images/gallery/gallery06.jpg
 ---
 
-Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.
+A whimsical and enchanting forest ceremony capturing the beauty of the Pacific Northwest.
